@@ -173,5 +173,8 @@
     <ClInclude Include="src\stardust\application\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\stardust\Stardust.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

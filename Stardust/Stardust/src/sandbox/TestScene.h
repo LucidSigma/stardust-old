@@ -2,15 +2,7 @@
 #ifndef TEST_SCENE_H
 #define TEST_SCENE_H
 
-#include "../stardust/scene/Scene.h"
-
-#include "../stardust/application/Application.h"
-#include "../stardust/assets/AssetManager.h"
-#include "../stardust/debug/logging/Log.h"
-#include "../stardust/input/Input.h"
-#include "../stardust/graphics/texture/Texture.h"
-#include "../stardust/scene/components/Components.h"
-#include "../stardust/scene/entity/Entity.h"
+#include "../stardust/Stardust.h"
 
 namespace sd = stardust;
 namespace sd_comp = stardust::components;
