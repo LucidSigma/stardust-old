@@ -2,8 +2,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "utility/interfaces/INoncopyable.h"
-#include "utility/interfaces/INonmovable.h"
+#include "../utility/interfaces/INoncopyable.h"
+#include "../utility/interfaces/INonmovable.h"
 
 #include <atomic>
 #include <cstdint>
@@ -15,11 +15,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "graphics/renderer/Renderer.h"
-#include "locale/Locale.h"
-#include "scene/SceneManager.h"
-#include "config/Config.h"
-#include "graphics/window/Window.h"
+#include "../graphics/renderer/Renderer.h"
+#include "../locale/Locale.h"
+#include "../scene/SceneManager.h"
+#include "../config/Config.h"
+#include "../graphics/window/Window.h"
 
 namespace stardust
 {

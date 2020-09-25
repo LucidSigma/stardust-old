@@ -4,7 +4,7 @@
 
 #include "../stardust/scene/Scene.h"
 
-#include "../stardust/Application.h"
+#include "../stardust/application/Application.h"
 #include "../stardust/assets/AssetManager.h"
 #include "../stardust/debug/logging/Log.h"
 #include "../stardust/input/Input.h"

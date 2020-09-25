@@ -153,7 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\stardust\Application.cpp" />
+    <ClCompile Include="src\stardust\application\Application.cpp" />
     <ClCompile Include="src\stardust\graphics\display\Display.cpp" />
     <ClCompile Include="src\stardust\graphics\renderer\Renderer.cpp" />
     <ClCompile Include="src\stardust\graphics\texture\Texture.cpp" />
@@ -177,7 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sandbox\TestScene.h" />
-    <ClInclude Include="src\stardust\Application.h" />
+    <ClInclude Include="src\stardust\application\Application.h" />
     <ClInclude Include="src\stardust\assets\AssetManager.h" />
     <ClInclude Include="src\stardust\graphics\Colour.h" />
     <ClInclude Include="src\stardust\graphics\display\Display.h" />

@@ -1,7 +1,7 @@
 #include <cstdlib>
 
 #include "sandbox/TestScene.h"
-#include "stardust/Application.h"
+#include "stardust/application/Application.h"
 
 int main([[maybe_unused]] const int argc, char* argv[])
 {

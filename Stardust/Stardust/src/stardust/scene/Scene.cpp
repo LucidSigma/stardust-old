@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-#include "../Application.h"
+#include "../application/Application.h"
 #include "entity/Entity.h"
 
 namespace stardust

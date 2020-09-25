@@ -9,14 +9,14 @@
 #include <stb/stb_image.h>
 #include <stb/stb_image_write.h>
 
-#include "debug/logging/Log.h"
-#include "debug/message_box/MessageBox.h"
-#include "input/Input.h"
-#include "input/KeyCode.h"
-#include "scene/Scene.h"
-#include "text/text_input/TextInput.h"
-#include "utility/enums/Enums.h"
-#include "vfs/VFS.h"
+#include "../debug/logging/Log.h"
+#include "../debug/message_box/MessageBox.h"
+#include "../input/Input.h"
+#include "../input/KeyCode.h"
+#include "../scene/Scene.h"
+#include "../text/text_input/TextInput.h"
+#include "../utility/enums/Enums.h"
+#include "../vfs/VFS.h"
 
 namespace stardust
 {
