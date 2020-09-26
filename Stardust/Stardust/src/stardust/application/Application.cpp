@@ -125,6 +125,8 @@ namespace stardust
 
 		Log::EngineInfo("Logger initialised.");
 		Log::EngineDebug("Platform detected: \"{}\".", GetPlatformName());
+		Log::EngineInfo("ECS initialised.");
+		Log::EngineInfo("Sound system initialised.");
 
 		if (!vfs::Initialise(createInfo.filesystem.argv0))
 		{

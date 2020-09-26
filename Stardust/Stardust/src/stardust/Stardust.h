@@ -4,8 +4,10 @@
 
 #include "application/Application.h"
 #include "assets/AssetManager.h"
-#include "config/Config.h"
 
+#include "audio/SoundSystem.h"
+
+#include "config/Config.h"
 #include "debug/logging/Log.h"
 #include "debug/message_box/MessageBox.h"
 

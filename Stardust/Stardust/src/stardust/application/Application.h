@@ -15,6 +15,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "../audio/SoundSystem.h"
 #include "../graphics/renderer/Renderer.h"
 #include "../locale/Locale.h"
 #include "../scene/SceneManager.h"
@@ -75,6 +76,7 @@ namespace stardust
 		bool m_isCurrentSceneFinished = false;
 
 		entt::registry m_entityRegistry{ };
+		SoundSystem m_soundSystem;
 
 		std::string m_screenshotDirectory;
 
@@ -97,6 +99,7 @@ namespace stardust
 		inline const Renderer& GetRenderer() const noexcept { return m_renderer; }
 		inline SceneManager& GetSceneManager() noexcept { return m_sceneManager; }
 		inline entt::registry& GetEntityRegistry() noexcept { return m_entityRegistry; }
+		inline const SoundSystem& GetSoundSystem() const noexcept { return m_soundSystem; }
 
 		[[nodiscard]] std::string GetPlatformName() const;
 
