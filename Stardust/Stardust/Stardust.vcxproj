@@ -122,13 +122,13 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep\SDL2-2.0.12\include;$(SolutionDir)dep\GLM-0.9.9.7\include;$(SolutionDir)dep\nlohmann-json-3.9.1\include;$(SolutionDir)dep\stb_image-2.26\include;$(SolutionDir)dep\stb_image_write-1.15\include;$(SolutionDir)dep\spdlog-1.8.0\include;$(SolutionDir)dep\entt-3.5.1\include;$(SolutionDir)dep\magic_enum-0.6.6\include;$(SolutionDir)dep\physfs-3.0.2\include;$(SolutionDir)dep\box2d-2.4.0\include;$(SolutionDir)dep\openal-soft-1.20.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dep\SDL2-2.0.12\include;$(SolutionDir)dep\GLM-0.9.9.7\include;$(SolutionDir)dep\nlohmann-json-3.9.1\include;$(SolutionDir)dep\stb_image-2.26\include;$(SolutionDir)dep\stb_image_write-1.15\include;$(SolutionDir)dep\spdlog-1.8.0\include;$(SolutionDir)dep\entt-3.5.1\include;$(SolutionDir)dep\magic_enum-0.6.6\include;$(SolutionDir)dep\physfs-3.0.2\include;$(SolutionDir)dep\box2d-2.4.0\include;$(SolutionDir)dep\soloud-2020.02.07\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2-2.0.12\lib\x64;$(SolutionDir)dep\physfs-3.0.2\lib\Debug;$(SolutionDir)dep\box2d-2.4.0\lib\Debug;$(SolutionDir)dep\openal-soft-1.20.1\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;physfs-static.lib;box2d.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2-2.0.12\lib\x64;$(SolutionDir)dep\physfs-3.0.2\lib\Debug;$(SolutionDir)dep\box2d-2.4.0\lib\Debug;$(SolutionDir)dep\openal-soft-1.20.1\lib\Debug;$(SolutionDir)dep\soloud-2020.02.07\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;physfs-static.lib;box2d.lib;soloud_static_x64_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,15 +141,15 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep\SDL2-2.0.12\include;$(SolutionDir)dep\GLM-0.9.9.7\include;$(SolutionDir)dep\nlohmann-json-3.9.1\include;$(SolutionDir)dep\stb_image-2.26\include;$(SolutionDir)dep\stb_image_write-1.15\include;$(SolutionDir)dep\spdlog-1.8.0\include;$(SolutionDir)dep\entt-3.5.1\include;$(SolutionDir)dep\magic_enum-0.6.6\include;$(SolutionDir)dep\physfs-3.0.2\include;$(SolutionDir)dep\box2d-2.4.0\include;$(SolutionDir)dep\openal-soft-1.20.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dep\SDL2-2.0.12\include;$(SolutionDir)dep\GLM-0.9.9.7\include;$(SolutionDir)dep\nlohmann-json-3.9.1\include;$(SolutionDir)dep\stb_image-2.26\include;$(SolutionDir)dep\stb_image_write-1.15\include;$(SolutionDir)dep\spdlog-1.8.0\include;$(SolutionDir)dep\entt-3.5.1\include;$(SolutionDir)dep\magic_enum-0.6.6\include;$(SolutionDir)dep\physfs-3.0.2\include;$(SolutionDir)dep\box2d-2.4.0\include;$(SolutionDir)dep\soloud-2020.02.07\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2-2.0.12\lib\x64;$(SolutionDir)dep\physfs-3.0.2\lib\Release;$(SolutionDir)dep\box2d-2.4.0\lib\Release;$(SolutionDir)dep\openal-soft-1.20.1\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;physfs-static.lib;box2d.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2-2.0.12\lib\x64;$(SolutionDir)dep\physfs-3.0.2\lib\Release;$(SolutionDir)dep\box2d-2.4.0\lib\Release;$(SolutionDir)dep\soloud-2020.02.07\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;physfs-static.lib;box2d.lib;soloud_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
