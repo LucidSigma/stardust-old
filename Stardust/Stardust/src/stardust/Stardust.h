@@ -5,6 +5,7 @@
 #include "application/Application.h"
 #include "assets/AssetManager.h"
 
+#include "audio/Listener.h"
 #include "audio/SoundSystem.h"
 
 #include "config/Config.h"

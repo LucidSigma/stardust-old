@@ -3,6 +3,7 @@
 #define SOUND_SYSTEM_H
 
 #include "../utility/interfaces/INoncopyable.h"
+#include "../utility/interfaces/INonmovable.h"
 
 #include <memory>
 
@@ -10,18 +11,19 @@
 #undef min
 #undef max
 
+#include "Listener.h"
+
 namespace stardust
 {
 	class SoundSystem
-		: private INoncopyable
+		: private INoncopyable, private INonmovable
 	{
 	private:
 		std::unique_ptr<SoLoud::Soloud> m_soLoudHandle;
+		Listener m_listener;
 
 	public:
 		SoundSystem();
-		SoundSystem(SoundSystem&& other) noexcept;
-		SoundSystem& operator =(SoundSystem&& other) noexcept;
 		~SoundSystem();
 
 		void Update() const;
@@ -46,6 +48,7 @@ namespace stardust
 		void SetSpeedOfSound(const float speedOfSound) const noexcept;
 
 		[[nodiscard]] SoLoud::Soloud& GetRawHandle() noexcept { return *m_soLoudHandle.get(); }
+		Listener& GetListener() noexcept { return m_listener; }
 
 	private:
 		void Initialise();

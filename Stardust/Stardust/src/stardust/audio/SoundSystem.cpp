@@ -1,28 +1,13 @@
 #include "SoundSystem.h"
 
 #include <algorithm>
-#include <utility>
 
 namespace stardust
 {
 	SoundSystem::SoundSystem()
-		: m_soLoudHandle(std::make_unique<SoLoud::Soloud>())
+		: m_soLoudHandle(std::make_unique<SoLoud::Soloud>()), m_listener(*this)
 	{
 		Initialise();
-	}
-
-	SoundSystem::SoundSystem(SoundSystem&& other) noexcept
-	{
-		Destroy();
-		std::swap(m_soLoudHandle, other.m_soLoudHandle);
-	}
-
-	SoundSystem& SoundSystem::operator=(SoundSystem && other) noexcept
-	{
-		Destroy();
-		m_soLoudHandle = std::exchange(other.m_soLoudHandle, nullptr);
-
-		return *this;
 	}
 
 	SoundSystem::~SoundSystem()
