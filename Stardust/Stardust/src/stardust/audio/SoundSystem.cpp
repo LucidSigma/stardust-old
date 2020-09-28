@@ -18,6 +18,11 @@ namespace stardust
 		m_soLoudHandle->update3dAudio();
 	}
 
+	void SoundSystem::PlaySound(Sound& sound, const bool startPaused) const
+	{
+		m_soLoudHandle->play(sound.GetRawHandle(), -1.0f, 0.0f, startPaused);
+	}
+
 	void SoundSystem::StopAllSounds() const
 	{
 		m_soLoudHandle->stopAll();

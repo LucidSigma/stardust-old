@@ -12,6 +12,7 @@
 #undef max
 
 #include "Listener.h"
+#include "sounds/Sound.h"
 
 namespace stardust
 {
@@ -29,8 +30,8 @@ namespace stardust
 		void Update() const;
 
 		// Play sound and return source when playing.
-		// AudioSource PlaySound(const Sound& sound, const bool startPlaying = false) const;
-		// AudioSource PlaySound(const SoundStream& soundStream, const bool startPlaying = false) const;
+		/*AudioSource*/ void PlaySound(Sound& sound, const bool startPaused = false) const;
+		// AudioSource PlaySound(const SoundStream& soundStream, const bool startPaused = false) const;
 
 		void StopAllSounds() const;
 		void PauseAllSounds() const;

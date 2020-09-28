@@ -80,7 +80,7 @@ public:
 			stardust::Log::Trace("Texture \"{}\" loaded successfully.", "assets/textures/gear.png");
 		}
 
-		m_sounds.Add("test", "assets/sounds/test.wav");
+		m_sounds.Add("test", "assets/sounds/reveal.wav");
 
 		if (!m_sounds["test"].IsValid())
 		{
@@ -148,6 +148,17 @@ public:
 			}
 		}
 
+		if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::Space))
+		{
+			m_sounds["test"].SetVolume(1.0f);
+			m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
+		}
+		else if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::B))
+		{
+			m_sounds["test"].SetVolume(0.25f);
+			m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
+		}
+
 		m_entityRegistry.view<KeyboardControlled, Velocity>().each([](const auto& keyboardController, auto& velocity)
 		{
 			velocity.x = 0.0f;
@@ -179,10 +190,7 @@ public:
 
 	virtual void Update(const float deltaTime) override
 	{
-		if ((unsigned int)std::round(m_application.GetElapsedTime()) % 10 == 0)
-		{
-			m_sounds["test"];
-		}
+		
 	}
 
 	virtual void Render(const stardust::Renderer& renderer) const override

@@ -42,21 +42,21 @@ namespace stardust
 		double m_length = 0.0f;
 		bool m_isSingleInstance = false;
 
-		float m_defaultVolume = 1.0f;
+		float m_volume = 1.0f;
 		InaudibleBehaviour m_inaudibleBehaviour = InaudibleBehaviour::Pause;
 		
 		bool m_isLooping = false;
-		double m_defaultLoopPoint = 0.0f;
+		double m_loopPoint = 0.0f;
 
-		float m_defaultDopplerFactor = 1.0f;
-		AttenuationModel m_defaultAttenuationModel = AttenuationModel::None;
-		float m_defaultAttenuationRolloffFactor = 1.0f;
+		float m_dopplerFactor = 1.0f;
+		AttenuationModel m_attenuationModel = AttenuationModel::None;
+		float m_attenuationRolloffFactor = 1.0f;
 		
-		bool m_distanceDelayByDefault = false;
-		bool m_relativeToListenerByDefault = false;
+		bool m_isDistanceDelayEnabled = false;
+		bool m_isRelativeToListener = false;
 
-		float m_defaultMinDistance = 1.0f;
-		float m_defaultMaxDistance = 1'000'000.0f;
+		float m_minDistance = 1.0f;
+		float m_maxDistance = 1'000'000.0f;
 
 	public:
 		Sound(const std::string_view& filepath);
@@ -71,36 +71,36 @@ namespace stardust
 		bool IsSingleInstance() const noexcept { return m_isSingleInstance; }
 		void SetSingleInstance(const bool isSingleInstance);
 
-		inline float GetDefaultVolume() const noexcept { return m_defaultVolume; }
-		void SetDefaultVolume(const float defaultVolume);
+		inline float GetVolume() const noexcept { return m_volume; }
+		void SetVolume(const float volume);
 
 		inline InaudibleBehaviour GetInaudibleBehaviour() const noexcept { return m_inaudibleBehaviour; }
 		void SetInaudibleBehaviour(const InaudibleBehaviour inaudibleBehaviour);
 
-		bool IsLoopingByDefault() const noexcept { return m_isLooping; }
-		void SetLoopingByDefault(const bool loopByDefault);
-		double GetDefaultLoopPoint() const noexcept { return m_defaultLoopPoint; }
-		void SetDefaultLoopPoint(const double defaultLoopPoint);
+		bool IsLooping() const noexcept { return m_isLooping; }
+		void SetLooping(const bool enableLooping);
+		double GetLoopPoint() const noexcept { return m_loopPoint; }
+		void SetLoopPoint(const double loopPoint);
 
-		float GetDefaultDopplerFactor() const noexcept { return m_defaultDopplerFactor; }
-		void SetDefaultDopplerFactor(const float defaultDopplerFactor);
+		float GetDopplerFactor() const noexcept { return m_dopplerFactor; }
+		void SetDopplerFactor(const float dopplerFactor);
 
-		AttenuationModel GetDefaultAttenuationModel() const noexcept { return m_defaultAttenuationModel; }
-		void SetDefaultAttenuationModel(const AttenuationModel defaultAttenuationModel);
-		float GetDefaultAttenuationRolloffFactor() const noexcept { return m_defaultAttenuationRolloffFactor; }
-		void SetDefaultAttenuationRolloffFactor(const float defaultAttenuationRolloffFactor);
+		AttenuationModel GetAttenuationModel() const noexcept { return m_attenuationModel; }
+		void SetAttenuationModel(const AttenuationModel attenuationModel);
+		float GetAttenuationRolloffFactor() const noexcept { return m_attenuationRolloffFactor; }
+		void SetAttenuationRolloffFactor(const float attenuationRolloffFactor);
 
-		bool IsDistanceDelayEnabledByDefault() const noexcept { return m_distanceDelayByDefault; }
-		void SetDistanceDelayByDefault(const bool enableDistanceDelay);
+		bool IsDistanceDelayEnabledBy() const noexcept { return m_isDistanceDelayEnabled; }
+		void SetDistanceDelayBy(const bool enableDistanceDelay);
 
-		bool IsRelativeToListenerByDefault() const noexcept { return m_relativeToListenerByDefault; }
-		void SetRelativeToListenerByDefault(const bool isRelativeToListener);
+		bool IsRelativeToListenerBy() const noexcept { return m_isRelativeToListener; }
+		void SetRelativeToListenerBy(const bool isRelativeToListener);
 
-		float GetDefaultMinDistance() const noexcept { return m_defaultMinDistance; }
-		void SetDefaultMinDistance(const float defaultMinDistance);
+		float GetMinDistance() const noexcept { return m_minDistance; }
+		void SetMinDistance(const float minDistance);
 
-		float GetDefaultMaxDistance() const noexcept { return m_defaultMaxDistance; }
-		void SetDefaultMaxDistance(const float defaultMaxDistance);
+		float GetMaxDistance() const noexcept { return m_maxDistance; }
+		void SetMaxDistance(const float maxDistance);
 
 		inline SoLoud::Wav& GetRawHandle() noexcept { return m_handle; }
 		inline const SoLoud::Wav& GetRawHandle() const noexcept { return m_handle; }

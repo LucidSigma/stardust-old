@@ -16,7 +16,7 @@ namespace stardust
 		const SoLoud::result loadStatus = m_handle.loadMem(
 			reinterpret_cast<const unsigned char*>(rawSoundData.data()),
 			static_cast<unsigned int>(rawSoundData.size()),
-			true,
+			false,
 			false
 		);
 		m_isValid = loadStatus == 0;
@@ -38,10 +38,10 @@ namespace stardust
 		m_isSingleInstance = isSingleInstance;
 	}
 
-	void Sound::SetDefaultVolume(const float defaultVolume)
+	void Sound::SetVolume(const float Volume)
 	{
-		m_handle.setVolume(defaultVolume);
-		m_defaultVolume = defaultVolume;
+		m_handle.setVolume(Volume);
+		m_volume = Volume;
 	}
 
 	void Sound::SetInaudibleBehaviour(const InaudibleBehaviour inaudibleBehaviour)
@@ -68,57 +68,57 @@ namespace stardust
 		m_inaudibleBehaviour = inaudibleBehaviour;
 	}
 
-	void Sound::SetLoopingByDefault(const bool loopByDefault)
+	void Sound::SetLooping(const bool enableLooping)
 	{
-		m_handle.setLooping(loopByDefault);
-		m_isLooping = loopByDefault;
+		m_handle.setLooping(enableLooping);
+		m_isLooping = enableLooping;
 	}
 
-	void Sound::SetDefaultLoopPoint(const double defaultLoopPoint)
+	void Sound::SetLoopPoint(const double loopPoint)
 	{
-		m_handle.setLoopPoint(defaultLoopPoint);
-		m_defaultLoopPoint = defaultLoopPoint;
+		m_handle.setLoopPoint(loopPoint);
+		m_loopPoint = loopPoint;
 	}
 
-	void Sound::SetDefaultDopplerFactor(const float defaultDopplerFactor)
+	void Sound::SetDopplerFactor(const float dopplerFactor)
 	{
-		m_handle.set3dDopplerFactor(defaultDopplerFactor);
-		m_defaultDopplerFactor = defaultDopplerFactor;
+		m_handle.set3dDopplerFactor(dopplerFactor);
+		m_dopplerFactor = dopplerFactor;
 	}
 
-	void Sound::SetDefaultAttenuationModel(const AttenuationModel defaultAttenuationModel)
+	void Sound::SetAttenuationModel(const AttenuationModel attenuationModel)
 	{
-		m_handle.set3dAttenuation(static_cast<unsigned int>(defaultAttenuationModel), m_defaultAttenuationRolloffFactor);
-		m_defaultAttenuationModel = defaultAttenuationModel;
+		m_handle.set3dAttenuation(static_cast<unsigned int>(attenuationModel), m_attenuationRolloffFactor);
+		m_attenuationModel = attenuationModel;
 	}
 
-	void Sound::SetDefaultAttenuationRolloffFactor(const float defaultAttenuationRolloffFactor)
+	void Sound::SetAttenuationRolloffFactor(const float attenuationRolloffFactor)
 	{
-		m_handle.set3dAttenuation(static_cast<unsigned int>(m_defaultAttenuationModel), defaultAttenuationRolloffFactor);
-		m_defaultAttenuationRolloffFactor = defaultAttenuationRolloffFactor;
+		m_handle.set3dAttenuation(static_cast<unsigned int>(m_attenuationModel), attenuationRolloffFactor);
+		m_attenuationRolloffFactor = attenuationRolloffFactor;
 	}
 
-	void Sound::SetDistanceDelayByDefault(const bool enableDistanceDelay)
+	void Sound::SetDistanceDelayBy(const bool enableDistanceDelay)
 	{
 		m_handle.set3dDistanceDelay(enableDistanceDelay);
-		m_distanceDelayByDefault = enableDistanceDelay;
+		m_isDistanceDelayEnabled = enableDistanceDelay;
 	}
 
-	void Sound::SetRelativeToListenerByDefault(const bool isRelativeToListener)
+	void Sound::SetRelativeToListenerBy(const bool isRelativeToListener)
 	{
 		m_handle.set3dListenerRelative(isRelativeToListener);
-		m_relativeToListenerByDefault = isRelativeToListener;
+		m_isRelativeToListener = isRelativeToListener;
 	}
 
-	void Sound::SetDefaultMinDistance(const float defaultMinDistance)
+	void Sound::SetMinDistance(const float minDistance)
 	{
-		m_handle.set3dMinMaxDistance(defaultMinDistance, m_defaultMaxDistance);
-		m_defaultMinDistance = defaultMinDistance;
+		m_handle.set3dMinMaxDistance(minDistance, m_maxDistance);
+		m_minDistance = minDistance;
 	}
 
-	void Sound::SetDefaultMaxDistance(const float defaultMaxDistance)
+	void Sound::SetMaxDistance(const float maxDistance)
 	{
-		m_handle.set3dMinMaxDistance(m_defaultMinDistance, defaultMaxDistance);
-		m_defaultMaxDistance = defaultMaxDistance;
+		m_handle.set3dMinMaxDistance(m_minDistance, maxDistance);
+		m_maxDistance = maxDistance;
 	}
 }
