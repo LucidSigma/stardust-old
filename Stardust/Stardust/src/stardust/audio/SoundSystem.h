@@ -28,7 +28,13 @@ namespace stardust
 
 		void Update() const;
 
+		// Play sound and return source when playing.
+		// AudioSource PlaySound(const Sound& sound, const bool startPlaying = false) const;
+		// AudioSource PlaySound(const SoundStream& soundStream, const bool startPlaying = false) const;
+
 		void StopAllSounds() const;
+		void PauseAllSounds() const;
+		void ResumeAllSounds() const;
 
 		void FadeVolumeGlobal(const float volumeToFadeTo, const float seconds) const;
 

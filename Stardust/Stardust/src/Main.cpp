@@ -9,7 +9,7 @@ int main([[maybe_unused]] const int argc, char* argv[])
 	soundSystem->init();
 
 	SoLoud::WavStream sample;
-	sample.load("HotAir2Boss.ogg");
+	std::cout << sample.load("test.wav") << "\n";
 
 	auto handle = soundSystem->play(sample, 1.0f, 0.0f, true);
 	soundSystem->setVolume(handle, 0.2f);

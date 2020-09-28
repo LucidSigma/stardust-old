@@ -48,6 +48,7 @@ class TestScene
 {
 private:
 	stardust::AssetManager<stardust::Texture> m_textures;
+	stardust::AssetManager<stardust::Sound> m_sounds;
 
 	stardust::Entity m_drawable;
 
@@ -77,6 +78,13 @@ public:
 			
 			m_textures[textureName].SetScaleMode(stardust::Texture::ScaleMode::Nearest);
 			stardust::Log::Trace("Texture \"{}\" loaded successfully.", "assets/textures/gear.png");
+		}
+
+		m_sounds.Add("test", "assets/sounds/test.wav");
+
+		if (!m_sounds["test"].IsValid())
+		{
+			return stardust::Status::Fail;
 		}
 
 		m_drawable = CreateEntity();
@@ -169,7 +177,13 @@ public:
 		});
 	}
 
-	virtual void Update(const float deltaTime) override { }
+	virtual void Update(const float deltaTime) override
+	{
+		if ((unsigned int)std::round(m_application.GetElapsedTime()) % 10 == 0)
+		{
+			m_sounds["test"];
+		}
+	}
 
 	virtual void Render(const stardust::Renderer& renderer) const override
 	{

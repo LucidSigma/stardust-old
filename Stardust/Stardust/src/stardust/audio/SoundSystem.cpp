@@ -1,7 +1,5 @@
 #include "SoundSystem.h"
 
-#include <algorithm>
-
 namespace stardust
 {
 	SoundSystem::SoundSystem()
@@ -23,6 +21,16 @@ namespace stardust
 	void SoundSystem::StopAllSounds() const
 	{
 		m_soLoudHandle->stopAll();
+	}
+
+	void SoundSystem::PauseAllSounds() const
+	{
+		m_soLoudHandle->setPauseAll(true);
+	}
+
+	void SoundSystem::ResumeAllSounds() const
+	{
+		m_soLoudHandle->setPauseAll(false);
 	}
 
 	void SoundSystem::FadeVolumeGlobal(const float volumeToFadeTo, const float seconds) const
@@ -57,7 +65,7 @@ namespace stardust
 
 	void SoundSystem::SetGlobalVolume(const float globalVolume) const noexcept
 	{
-		m_soLoudHandle->setGlobalVolume(std::clamp(globalVolume, 0.0f, 1.0f));
+		m_soLoudHandle->setGlobalVolume(globalVolume);
 	}
 
 	[[nodiscard]] float SoundSystem::GetPostClipScaler() const noexcept
@@ -67,7 +75,7 @@ namespace stardust
 
 	void SoundSystem::SetPostClipScaler(const float postClipScaler) const noexcept
 	{
-		m_soLoudHandle->setPostClipScaler(std::clamp(postClipScaler, 0.0f, 1.0f));
+		m_soLoudHandle->setPostClipScaler(postClipScaler);
 	}
 
 	[[nodiscard]] float SoundSystem::GetSpeedOfSound() const noexcept

@@ -53,6 +53,7 @@ namespace stardust
 			timeAccumulator += m_deltaTime;
 
 			PollEvents(event);
+			m_soundSystem.Update();
 
 			while (timeAccumulator >= m_fixedTimestep)
 			{
