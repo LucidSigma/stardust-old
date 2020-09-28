@@ -22,6 +22,8 @@ namespace stardust
 
 		extern void SetWriteDirectory(const std::string_view& writeDirectory);
 
+		[[nodiscard]] extern bool DoesFileExist(const std::string_view& filepath);
+
 		[[nodiscard]] extern std::vector<std::byte> ReadFileData(const std::string_view& filepath);
 		[[nodiscard]] extern Status WriteToFile(const std::string_view& filepath, const std::vector<std::byte>& data);
 		[[nodiscard]] extern Status WriteToFile(const std::string_view& filepath, const std::string& data);

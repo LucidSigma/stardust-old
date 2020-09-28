@@ -34,6 +34,11 @@ namespace stardust
 			PHYSFS_setWriteDir(writeDirectory.data());
 		}
 
+		bool DoesFileExist(const std::string_view& filepath)
+		{
+			return PHYSFS_exists(filepath.data()) != 0;
+		}
+
 		[[nodiscard]] std::vector<std::byte> ReadFileData(const std::string_view& filepath)
 		{
 			PHYSFS_File* file = PHYSFS_openRead(filepath.data());

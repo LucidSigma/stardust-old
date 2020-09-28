@@ -25,18 +25,22 @@ namespace stardust
 		}
 
 		const std::string clientLocaleFilepath = m_clientLocaleDirectory + "/" + std::string(localeName) + ".json";
-		const auto clientLocale = LoadLocaleFile(clientLocaleFilepath);
 
-		if (!clientLocale.has_value())
+		if (vfs::DoesFileExist(clientLocaleFilepath))
 		{
-			return Status::Fail;
-		}
+			const auto clientLocale = LoadLocaleFile(clientLocaleFilepath);
 
-		localeAccumulator->merge_patch(*clientLocale);
+			if (!clientLocale.has_value())
+			{
+				return Status::Fail;
+			}
 
-		if (localeAccumulator->is_discarded())
-		{
-			return Status::Fail;
+			localeAccumulator->merge_patch(*clientLocale);
+
+			if (localeAccumulator->is_discarded())
+			{
+				return Status::Fail;
+			}
 		}
 
 		m_currentLocale = std::move(*localeAccumulator);
