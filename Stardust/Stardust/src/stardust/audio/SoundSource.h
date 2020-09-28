@@ -4,6 +4,8 @@
 
 #include "../utility/interfaces/INoncopyable.h"
 
+#include <limits>
+
 #include <glm/glm.hpp>
 #include <soloud/soloud.h>
 #undef min
@@ -17,11 +19,11 @@ namespace stardust
 		: private INoncopyable
 	{
 	private:
-		class SoundSystem* m_soundSystem;
-		SoLoud::handle m_handle;
+		class SoundSystem* m_soundSystem = nullptr;
+		SoLoud::handle m_handle = std::numeric_limits<SoLoud::handle>::max();
 
-		glm::vec3 m_position;
-		glm::vec3 m_velocity;
+		glm::vec3 m_position = glm::vec3{ 0.0f, 0.0f, 0.0f };
+		glm::vec3 m_velocity = glm::vec3{ 0.0f, 0.0f, 0.0f };
 
 		float m_minDistance = 1.0f;
 		float m_maxDistance = 1'000'000.0f;
@@ -34,6 +36,8 @@ namespace stardust
 		SoundSource(SoundSource&& other) noexcept;
 		SoundSource& operator =(SoundSource&& other) noexcept;
 		~SoundSource() noexcept = default;
+
+		inline bool HasValidHandle() const noexcept { return m_soundSystem != nullptr; }
 
 		void Pause() const;
 		void Resume() const;

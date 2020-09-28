@@ -148,28 +148,23 @@ public:
 			}
 		}
 
-		stardust::SoundSource test;
-		bool played = false;
+		stardust::SoundSource soundSource;
 
 		if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::Space))
 		{
 			m_sounds["test"].SetVolume(1.0f);
-			test = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
-
-			played = true;
+			soundSource = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
 		}
 		else if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::B))
 		{
 			m_sounds["test"].SetVolume(0.25f);
-			test = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
-
-			played = true;
+			soundSource = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
 		}
 
-		if (played)
+		if (soundSource.HasValidHandle())
 		{
-			test.SetRelativePlaySpeed(0.4f);
-			test.FadePan(1.0f, 1.0f);
+			soundSource.SetRelativePlaySpeed(0.4f);
+			soundSource.FadePan(1.0f, 1.0f);
 		}
 
 		m_entityRegistry.view<KeyboardControlled, Velocity>().each([](const auto& keyboardController, auto& velocity)
