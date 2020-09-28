@@ -1,7 +1,13 @@
-[18:00:51] [info] STARDUST: Logger initialised.
-[18:00:51] [debug] STARDUST: Platform detected: "Windows".
-[18:00:51] [info] STARDUST: ECS initialised.
-[18:00:51] [info] STARDUST: Virtual filesystem initialised.
-[18:00:51] [info] STARDUST: Config loaded.
-[18:00:51] [info] STARDUST: Locale "en-gb" loaded.
-[18:00:54] [critical] STARDUST: Failed to initialise sound system.
+[20:18:33] [info] STARDUST: Logger initialised.
+[20:18:33] [debug] STARDUST: Platform detected: "Windows".
+[20:18:33] [info] STARDUST: ECS initialised.
+[20:18:33] [info] STARDUST: Virtual filesystem initialised.
+[20:18:33] [info] STARDUST: Config loaded.
+[20:18:33] [info] STARDUST: Locale "en-gb" loaded.
+[20:18:33] [info] STARDUST: Sound system initialised.
+[20:18:34] [info] STARDUST: SDL initialised.
+[20:18:34] [info] STARDUST: Window created.
+[20:18:34] [info] STARDUST: Renderer created without VSync.
+[20:18:34] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
+[20:18:34] [trace] STARDUST: Initial scene "Test" loaded.
+[20:18:52] [trace] STARDUST: Scene "Test" finished.

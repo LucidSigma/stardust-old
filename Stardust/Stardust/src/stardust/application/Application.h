@@ -99,7 +99,7 @@ namespace stardust
 		inline const Renderer& GetRenderer() const noexcept { return m_renderer; }
 		inline SceneManager& GetSceneManager() noexcept { return m_sceneManager; }
 		inline entt::registry& GetEntityRegistry() noexcept { return m_entityRegistry; }
-		inline const SoundSystem& GetSoundSystem() const noexcept { return m_soundSystem; }
+		inline SoundSystem& GetSoundSystem() noexcept { return m_soundSystem; }
 
 		[[nodiscard]] std::string GetPlatformName() const;
 

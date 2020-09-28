@@ -9,6 +9,7 @@
 #include "audio/sounds/SoundBase.h"
 #include "audio/sounds/SoundEnums.h"
 #include "audio/sounds/Sounds.h"
+#include "audio/SoundSource.h"
 #include "audio/SoundSystem.h"
 
 #include "config/Config.h"

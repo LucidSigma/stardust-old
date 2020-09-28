@@ -23,6 +23,9 @@ namespace stardust
 		glm::vec3 m_position;
 		glm::vec3 m_velocity;
 
+		float m_minDistance = 1.0f;
+		float m_maxDistance = 1'000'000.0f;
+
 		InaudibleBehaviour m_inaudibleBehaviour = InaudibleBehaviour::Pause;
 
 	public:
@@ -35,8 +38,8 @@ namespace stardust
 		void Resume() const;
 		void Stop() const;
 
-		bool IsPlaying() const;
-		bool IsPaused() const;
+		[[nodiscard]] bool IsPlaying() const;
+		[[nodiscard]] bool IsPaused() const;
 		[[nodiscard]] bool IsStopped() const;
 
 		void SchedulePause(const float secondsDelay);
@@ -50,6 +53,7 @@ namespace stardust
 
 		[[nodiscard]] double GetStreamTime() const;
 		void Seek(const double seconds);
+		void Rewind();
 
 		[[nodiscard]] float GetVolume() const;
 		[[nodiscard]] float GetOverallVolume() const;
@@ -75,14 +79,14 @@ namespace stardust
 		void OscillateRelativePlaySpeed(const float toRelativePlaySpeed, const float fromRelativePlaySpeed, const float frequency);
 		void ResetRelativePlaySpeedOscillation();
 
-		const glm::vec3& GetPosition() const noexcept;
+		inline const glm::vec3& GetPosition() const noexcept { return m_position; }
 		void SetPosition(const glm::vec3& position);
-		const glm::vec3& GetVelocity() const noexcept;
+		inline const glm::vec3& GetVelocity() const noexcept { return m_velocity; }
 		void SetVelocity(const glm::vec3& velocity);
 
-		float GetMinDistance() const noexcept;
+		inline float GetMinDistance() const noexcept { return m_minDistance; }
 		void SetMinDistance(const float minDistance);
-		float GetMaxDistance() const noexcept;
+		inline float GetMaxDistance() const noexcept { return m_maxDistance; }
 		void SetMaxDistance(const float maxDistance);
 
 		inline InaudibleBehaviour GetInaudibleBehaviour() const noexcept { return m_inaudibleBehaviour; }
@@ -90,9 +94,6 @@ namespace stardust
 
 		[[nodiscard]] bool IsProtected() const;
 		void SetProtection(const bool isProtected);
-
-		[[nodiscard]] float GetPostClipScaler() const;
-		void SetPostClipScaler(const float postClipScaler);
 
 		inline SoLoud::handle GetRawHandle() const noexcept { return m_handle; }
 	};
