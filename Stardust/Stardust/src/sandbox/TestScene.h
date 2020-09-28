@@ -61,31 +61,34 @@ public:
 
 	[[nodiscard]] virtual stardust::Status OnLoad() override
 	{
-		const std::initializer_list<std::pair<std::string, std::string_view>> textureData{
-			{ "gear", "assets/textures/gear.png" },
-		};
+		const auto textures = sd::vfs::GetAllFilesInDirectory("assets/textures");
 
-		for (const auto& [textureName, texturePath] : textureData)
+		for (const auto textureFile : textures)
 		{
-			m_textures.Add(textureName, m_application.GetRenderer(), texturePath);
+			const auto textureName = sd::vfs::GetFileStem(textureFile);
+			m_textures.Add(textureName, m_application.GetRenderer(), textureFile);
 
 			if (!m_textures[textureName].IsValid())
 			{
-				stardust::Log::Error("Texture \"{}\" failed to load.", "assets/textures/gear.png");
+				stardust::Log::Error("Texture \"{}\" failed to load.", textureFile);
 
 				return stardust::Status::Fail;
 			}
-			
+
 			m_textures[textureName].SetScaleMode(stardust::Texture::ScaleMode::Nearest);
-			stardust::Log::Trace("Texture \"{}\" loaded successfully.", "assets/textures/gear.png");
+			stardust::Log::Trace("Texture \"{}\" loaded successfully.", textureFile);
 		}
 
 		m_sounds.Add("test", "assets/sounds/test.wav");
 
 		if (!m_sounds["test"].IsValid())
 		{
+			stardust::Log::Error("Sound \"{}\" failed to load.", "assets/sounds/test.wav");
+
 			return stardust::Status::Fail;
 		}
+
+		stardust::Log::Trace("Sound \"{}\" loaded successfully.", "assets/sounds/test.wav");
 
 		m_drawable = CreateEntity();
 		m_drawable.AddComponent<KeyboardControlled>(500.0f);

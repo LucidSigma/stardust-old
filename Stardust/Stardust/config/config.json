@@ -8,7 +8,7 @@
     "enable-vsync": false
   },
   "graphics": {
-    "enable-fullscreen-minimise": false
+    "enable-fullscreen-minimise": true
   },
   "locale": "en-gb",
   "window": {

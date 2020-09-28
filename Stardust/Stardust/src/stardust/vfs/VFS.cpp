@@ -1,5 +1,7 @@
 #include "VFS.h"
 
+#include <filesystem>
+
 #include <physfs/physfs.h>
 
 namespace stardust
@@ -34,9 +36,61 @@ namespace stardust
 			PHYSFS_setWriteDir(writeDirectory.data());
 		}
 
-		bool DoesFileExist(const std::string_view& filepath)
+		[[nodiscard]] std::string GetDirectorySeparator()
+		{
+			return std::string(PHYSFS_getDirSeparator());
+		}
+
+		[[nodiscard]] std::vector<std::string> GetAllFilesInDirectory(const std::string_view& directory)
+		{
+			std::vector<std::string> files{ };
+			char** enumeratedFiles = PHYSFS_enumerateFiles(directory.data());
+
+			for (const char* const* filename = enumeratedFiles; *filename != nullptr; ++filename)
+			{
+				files.push_back(std::string(directory) + "/" + *filename);
+			}
+
+			PHYSFS_freeList(enumeratedFiles);
+			enumeratedFiles = nullptr;
+
+			return files;
+		}
+
+		[[nodiscard]] std::vector<std::string> GetAllFileNamesInDirectory(const std::string_view& directory)
+		{		
+			std::vector<std::string> files{ };
+			char** enumeratedFiles = PHYSFS_enumerateFiles(directory.data());
+			
+			for (const char* const* filename = enumeratedFiles; *filename != nullptr; ++filename)
+			{
+				files.push_back(std::string(*filename));
+			}
+
+			PHYSFS_freeList(enumeratedFiles);
+			enumeratedFiles = nullptr;
+
+			return files;
+		}
+
+		[[nodiscard]] bool DoesFileExist(const std::string_view& filepath)
 		{
 			return PHYSFS_exists(filepath.data()) != 0;
+		}
+
+		[[nodiscard]] std::string GetFilenameFromDirectory(const std::string_view& filepath)
+		{
+			return std::filesystem::path(filepath).filename().string();
+		}
+
+		[[nodiscard]] std::string GetFileStem(const std::string_view& filename)
+		{
+			return std::filesystem::path(filename).stem().string();
+		}
+
+		[[nodiscard]] std::string GetFileExtension(const std::string_view& filename)
+		{
+			return std::filesystem::path(filename).extension().string();
 		}
 
 		[[nodiscard]] std::vector<std::byte> ReadFileData(const std::string_view& filepath)
