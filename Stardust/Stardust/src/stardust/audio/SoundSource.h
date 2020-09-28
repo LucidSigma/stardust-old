@@ -29,7 +29,8 @@ namespace stardust
 		InaudibleBehaviour m_inaudibleBehaviour = InaudibleBehaviour::Pause;
 
 	public:
-		explicit SoundSource(const SoLoud::handle handle, class SoundSystem& soundSystem, const glm::vec3& position = glm::vec3{ 0.0f, 0.0f, 0.0f }, const glm::vec3& velocity = glm::vec3{ 0.0f, 0.0f, 0.0f });
+		SoundSource() = default;
+		SoundSource(const SoLoud::handle handle, class SoundSystem& soundSystem, const glm::vec3& position = glm::vec3{ 0.0f, 0.0f, 0.0f }, const glm::vec3& velocity = glm::vec3{ 0.0f, 0.0f, 0.0f });
 		SoundSource(SoundSource&& other) noexcept;
 		SoundSource& operator =(SoundSource&& other) noexcept;
 		~SoundSource() noexcept = default;
