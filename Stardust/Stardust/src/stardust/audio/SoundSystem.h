@@ -13,6 +13,7 @@
 
 #include "Listener.h"
 #include "sounds/Sounds.h"
+#include "SoundSource.h"
 
 namespace stardust
 {
@@ -33,8 +34,8 @@ namespace stardust
 
 		inline bool DidInitialiseSuccessfully() const noexcept { return m_didInitialiseSuccessfully; }
 
-		/*AudioSource*/ void PlaySound(Sound& sound, const bool startPaused = false) const;
-		/* AudioSource */ void PlaySound(SoundStream& soundStream, const bool startPaused = false) const;
+		SoundSource PlaySound(Sound& sound, const bool startPaused = false) const;
+		SoundSource PlaySound(SoundStream& soundStream, const bool startPaused = false) const;
 
 		void StopAllSounds() const;
 		void PauseAllSounds() const;

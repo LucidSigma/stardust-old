@@ -18,14 +18,18 @@ namespace stardust
 		m_soLoudHandle->update3dAudio();
 	}
 
-	void SoundSystem::PlaySound(Sound& sound, const bool startPaused) const
+	SoundSource SoundSystem::PlaySound(Sound& sound, const bool startPaused) const
 	{
-		m_soLoudHandle->play(sound.GetRawHandle(), -1.0f, 0.0f, startPaused);
+		const SoLoud::handle soundHandle = m_soLoudHandle->play(sound.GetRawHandle(), -1.0f, 0.0f, startPaused);
+
+		return SoundSource(soundHandle);
 	}
 
-	void SoundSystem::PlaySound(SoundStream& soundStream, const bool startPaused) const
+	SoundSource SoundSystem::PlaySound(SoundStream& soundStream, const bool startPaused) const
 	{
-		m_soLoudHandle->play(soundStream.GetRawHandle(), -1.0f, 0.0f, startPaused);
+		const SoLoud::handle soundHandle = m_soLoudHandle->play(soundStream.GetRawHandle(), -1.0f, 0.0f, startPaused);
+
+		return SoundSource(soundHandle);
 	}
 
 	void SoundSystem::StopAllSounds() const
@@ -110,6 +114,8 @@ namespace stardust
 		{
 			m_soLoudHandle->deinit();
 			m_soLoudHandle = nullptr;
+
+			m_didInitialiseSuccessfully = false;
 		}
 	}
 }
