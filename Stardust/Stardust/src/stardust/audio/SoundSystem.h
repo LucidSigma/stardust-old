@@ -23,11 +23,15 @@ namespace stardust
 		std::unique_ptr<SoLoud::Soloud> m_soLoudHandle;
 		Listener m_listener;
 
+		bool m_didInitialiseSuccessfully = false;
+
 	public:
 		SoundSystem();
 		~SoundSystem();
 
 		void Update() const;
+
+		inline bool DidInitialiseSuccessfully() const noexcept { return m_didInitialiseSuccessfully; }
 
 		/*AudioSource*/ void PlaySound(Sound& sound, const bool startPaused = false) const;
 		/* AudioSource */ void PlaySound(SoundStream& soundStream, const bool startPaused = false) const;

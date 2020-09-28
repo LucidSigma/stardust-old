@@ -5,12 +5,14 @@
       "initialise-sdl": "Failed to initialize SDL.",
       "next-scene": "Failed to load next scene.",
       "renderer": "Failed to create renderer.",
+      "sound": "Failed to initialize sound system.",
       "window": "Failed to create window."
     },
     "titles": {
       "initialise": "Initialize Error",
       "renderer": "Renderer Error",
       "scene": "Scene Error",
+      "sound": "Sound Error",
       "window": "Window Error"
     }
   },

@@ -57,7 +57,7 @@ namespace stardust
 				true,
 				false
 			);
-			m_isValid = loadStatus == 0;
+			m_isValid = loadStatus == 0u;
 
 			if (m_isValid)
 			{

@@ -127,7 +127,6 @@ namespace stardust
 		Log::EngineInfo("Logger initialised.");
 		Log::EngineDebug("Platform detected: \"{}\".", GetPlatformName());
 		Log::EngineInfo("ECS initialised.");
-		Log::EngineInfo("Sound system initialised.");
 
 		if (!vfs::Initialise(createInfo.filesystem.argv0))
 		{
@@ -160,6 +159,16 @@ namespace stardust
 		}
 
 		Log::EngineInfo("Locale \"{}\" loaded.", m_locale.GetCurrentLocaleName());
+
+		if (!m_soundSystem.DidInitialiseSuccessfully())
+		{
+			message_box::Show(m_locale["errors"]["titles"]["sound"], m_locale["errors"]["bodies"]["sound"], message_box::Type::Error);
+			Log::EngineCritical("Failed to initialise sound system.");
+
+			return;
+		}
+		
+		Log::EngineInfo("Sound system initialised.");
 
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		{

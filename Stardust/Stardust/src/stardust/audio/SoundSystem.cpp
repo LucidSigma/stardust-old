@@ -100,7 +100,8 @@ namespace stardust
 
 	void SoundSystem::Initialise()
 	{
-		m_soLoudHandle->init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::LEFT_HANDED_3D);
+		const SoLoud::result initialiseStatus = m_soLoudHandle->init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::LEFT_HANDED_3D);
+		m_didInitialiseSuccessfully = initialiseStatus == 0u;
 	}
 
 	void SoundSystem::Destroy()
