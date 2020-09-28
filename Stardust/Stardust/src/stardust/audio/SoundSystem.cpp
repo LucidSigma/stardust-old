@@ -18,18 +18,94 @@ namespace stardust
 		m_soLoudHandle->update3dAudio();
 	}
 
-	SoundSource SoundSystem::PlaySound(Sound& sound, const bool startPaused) const
+	SoundSource SoundSystem::PlaySound(Sound& sound, const bool startPaused)
 	{
 		const SoLoud::handle soundHandle = m_soLoudHandle->play(sound.GetRawHandle(), -1.0f, 0.0f, startPaused);
 
-		return SoundSource(soundHandle);
+		return SoundSource(soundHandle, *this);
 	}
 
-	SoundSource SoundSystem::PlaySound(SoundStream& soundStream, const bool startPaused) const
+	SoundSource SoundSystem::PlaySound(SoundStream& soundStream, const bool startPaused)
 	{
 		const SoLoud::handle soundHandle = m_soLoudHandle->play(soundStream.GetRawHandle(), -1.0f, 0.0f, startPaused);
 
-		return SoundSource(soundHandle);
+		return SoundSource(soundHandle, *this);
+	}
+
+	SoundSource SoundSystem::Play3DSound(Sound& sound, const glm::vec3& position, const glm::vec3& velocity, const bool startPaused)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->play3d(
+			sound.GetRawHandle(),
+			position.x, position.y, position.z,
+			velocity.x, velocity.y, velocity.z,
+			1.0f, startPaused
+		);
+
+		return SoundSource(soundHandle, *this, position, velocity);
+	}
+
+	SoundSource SoundSystem::Play3DSound(SoundStream& soundStream, const glm::vec3& position, const glm::vec3& velocity, const bool startPaused)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->play3d(
+			soundStream.GetRawHandle(),
+			position.x, position.y, position.z,
+			velocity.x, velocity.y, velocity.z,
+			1.0f, startPaused
+		);
+
+		return SoundSource(soundHandle, *this, position, velocity);
+	}
+
+	SoundSource SoundSystem::PlaySoundWithDelay(Sound& sound, const float secondsDelay)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->playClocked(secondsDelay, sound.GetRawHandle());
+
+		return SoundSource(soundHandle, *this);
+	}
+
+	SoundSource SoundSystem::PlaySoundWithDelay(SoundStream& soundStream, const float secondsDelay)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->playClocked(secondsDelay, soundStream.GetRawHandle());
+
+		return SoundSource(soundHandle, *this);
+	}
+
+	SoundSource SoundSystem::Play3DSoundWithDelay(Sound& sound, const float secondsDelay, const glm::vec3& position, const glm::vec3& velocity)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->play3dClocked(
+			secondsDelay, sound.GetRawHandle(),
+			position.x, position.y, position.z,
+			velocity.x, velocity.y, velocity.z,
+			1.0f
+		);
+
+		return SoundSource(soundHandle, *this, position, velocity);
+	}
+
+	SoundSource SoundSystem::Play3DSoundWithDelay(SoundStream& soundStream, const float secondsDelay, const glm::vec3& position, const glm::vec3& velocity)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->play3dClocked(
+			secondsDelay, soundStream.GetRawHandle(),
+			position.x, position.y, position.z,
+			velocity.x, velocity.y, velocity.z,
+			1.0f
+		);
+
+		return SoundSource(soundHandle, *this, position, velocity);
+	}
+
+	SoundSource SoundSystem::PlaySoundInBackground(Sound& sound, const bool startPaused)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->playBackground(sound.GetRawHandle(), -1.0f, 0.0f, startPaused);
+
+		return SoundSource(soundHandle, *this);
+	}
+
+	SoundSource SoundSystem::PlaySoundInBackground(SoundStream& soundStream, const bool startPaused)
+	{
+		const SoLoud::handle soundHandle = m_soLoudHandle->playBackground(soundStream.GetRawHandle(), -1.0f, 0.0f, startPaused);
+
+		return SoundSource(soundHandle, *this);
 	}
 
 	void SoundSystem::StopAllSounds() const
@@ -57,9 +133,9 @@ namespace stardust
 		m_soLoudHandle->oscillateGlobalVolume(fromVolume, toVolume, frequency);
 	}
 
-	void SoundSystem::ResetGlobalOscillation() const
+	void SoundSystem::ResetGlobalVolumeOscillation() const
 	{
-		m_soLoudHandle->oscillateGlobalVolume(1.0f, 1.0f, 0.0f);
+		m_soLoudHandle->oscillateGlobalVolume(1.0f, 1.0f, 0.0);
 	}
 
 	unsigned int SoundSystem::GetPlayingSoundCount() const
@@ -104,7 +180,7 @@ namespace stardust
 
 	void SoundSystem::Initialise()
 	{
-		const SoLoud::result initialiseStatus = m_soLoudHandle->init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::LEFT_HANDED_3D);
+		const SoLoud::result initialiseStatus = m_soLoudHandle->init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::LEFT_HANDED_3D, SoLoud::Soloud::SDL2);
 		m_didInitialiseSuccessfully = initialiseStatus == 0u;
 	}
 

@@ -7,6 +7,7 @@
 
 #include <memory>
 
+#include <glm/glm.hpp>
 #include <soloud/soloud.h>
 #undef min
 #undef max
@@ -34,17 +35,27 @@ namespace stardust
 
 		inline bool DidInitialiseSuccessfully() const noexcept { return m_didInitialiseSuccessfully; }
 
-		SoundSource PlaySound(Sound& sound, const bool startPaused = false) const;
-		SoundSource PlaySound(SoundStream& soundStream, const bool startPaused = false) const;
+		SoundSource PlaySound(Sound& sound, const bool startPaused = false);
+		SoundSource PlaySound(SoundStream& soundStream, const bool startPaused = false);
+		SoundSource Play3DSound(Sound& sound, const glm::vec3& position, const glm::vec3& velocity = glm::vec3{ 0.0f, 0.0f, 0.0f }, const bool startPaused = false);
+		SoundSource Play3DSound(SoundStream& soundStream, const glm::vec3& position, const glm::vec3& velocity = glm::vec3{ 0.0f, 0.0f, 0.0f }, const bool startPaused = false);
 
-		void StopAllSounds() const;
+		SoundSource PlaySoundWithDelay(Sound& sound, const float secondsDelay);
+		SoundSource PlaySoundWithDelay(SoundStream& soundStream, const float secondsDelay);
+		SoundSource Play3DSoundWithDelay(Sound& sound, const float secondsDelay, const glm::vec3& position, const glm::vec3& velocity = glm::vec3{ 0.0f, 0.0f, 0.0f });
+		SoundSource Play3DSoundWithDelay(SoundStream& soundStream, const float secondsDelay, const glm::vec3& position, const glm::vec3& velocity = glm::vec3{ 0.0f, 0.0f, 0.0f });
+
+		SoundSource PlaySoundInBackground(Sound& sound, const bool startPaused = false);
+		SoundSource PlaySoundInBackground(SoundStream& soundStream, const bool startPaused = false);
+
 		void PauseAllSounds() const;
 		void ResumeAllSounds() const;
+		void StopAllSounds() const;
 
 		void FadeVolumeGlobal(const float volumeToFadeTo, const float seconds) const;
 
 		void OscillateGlobalVolume(const float toVolume, const float fromVolume, const float frequency) const;
-		void ResetGlobalOscillation() const;
+		void ResetGlobalVolumeOscillation() const;
 
 		[[nodiscard]] unsigned int GetPlayingSoundCount() const;
 		[[nodiscard]] bool IsSoundPlaying() const;

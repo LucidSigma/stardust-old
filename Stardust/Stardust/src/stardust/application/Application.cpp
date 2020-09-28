@@ -52,8 +52,8 @@ namespace stardust
 			m_elapsedTime += m_deltaTime;
 			timeAccumulator += m_deltaTime;
 
-			PollEvents(event);
 			m_soundSystem.Update();
+			PollEvents(event);
 
 			while (timeAccumulator >= m_fixedTimestep)
 			{

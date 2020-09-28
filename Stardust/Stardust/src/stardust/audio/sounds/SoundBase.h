@@ -34,7 +34,7 @@ namespace stardust
 		InaudibleBehaviour m_inaudibleBehaviour = InaudibleBehaviour::Pause;
 		
 		bool m_isLooping = false;
-		double m_loopPoint = 0.0f;
+		float m_loopPoint = 0.0f;
 
 		float m_dopplerFactor = 1.0f;
 		AttenuationModel m_attenuationModel = AttenuationModel::None;
@@ -74,8 +74,7 @@ namespace stardust
 			m_handle.stop();
 		}
 
-		double GetLength() const noexcept { return m_length; }
-
+		inline double GetLength() const noexcept { return m_length; }
 		inline bool IsSingleInstance() const noexcept { return m_isSingleInstance; }
 
 		void SetSingleInstance(const bool isSingleInstance)
@@ -126,9 +125,9 @@ namespace stardust
 			m_isLooping = enableLooping;
 		}
 
-		inline double GetLoopPoint() const noexcept { return m_loopPoint; }
+		inline float GetLoopPoint() const noexcept { return m_loopPoint; }
 
-		void SetLoopPoint(const double loopPoint)
+		void SetLoopPoint(const float loopPoint)
 		{
 			m_handle.setLoopPoint(loopPoint);
 			m_loopPoint = loopPoint;

@@ -84,6 +84,9 @@
     <ClCompile Include="src\stardust\audio\Listener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\stardust\audio\SoundSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stardust\utility\interfaces\INoncopyable.h">
@@ -195,6 +198,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\stardust\audio\sounds\SoundEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stardust\audio\SoundSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
