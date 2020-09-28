@@ -84,9 +84,6 @@
     <ClCompile Include="src\stardust\audio\Listener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\stardust\audio\sounds\Sound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stardust\utility\interfaces\INoncopyable.h">
@@ -191,10 +188,13 @@
     <ClInclude Include="src\stardust\audio\Listener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\stardust\audio\sounds\Sound.h">
+    <ClInclude Include="src\stardust\audio\sounds\SoundBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\stardust\audio\sounds\SoundStream.h">
+    <ClInclude Include="src\stardust\audio\sounds\Sounds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stardust\audio\sounds\SoundEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

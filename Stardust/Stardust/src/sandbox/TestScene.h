@@ -80,7 +80,7 @@ public:
 			stardust::Log::Trace("Texture \"{}\" loaded successfully.", "assets/textures/gear.png");
 		}
 
-		m_sounds.Add("test", "assets/sounds/reveal.wav");
+		m_sounds.Add("test", "assets/sounds/test.wav");
 
 		if (!m_sounds["test"].IsValid())
 		{
