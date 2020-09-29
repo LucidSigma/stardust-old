@@ -6,6 +6,7 @@
 
 #include <glm/glm.hpp>
 #include <magic_enum/magic_enum.hpp>
+#include <SDL2/SDL_ttf.h>
 #include <stb/stb_image.h>
 #include <stb/stb_image_write.h>
 
@@ -36,6 +37,7 @@ namespace stardust
 
 		vfs::Quit();
 		
+		TTF_Quit();
 		SDL_Quit();
 	}
 
@@ -221,6 +223,16 @@ namespace stardust
 
 		m_renderer.SetLogicalSize(createInfo.rendererLogicalSize);
 		Log::EngineInfo("Renderer created {} VSync.", m_config["frame-rate"]["enable-vsync"] ? "with" : "without");
+
+		if (TTF_Init() != 0)
+		{
+			message_box::Show(m_locale["errors"]["titles"]["ttf"], m_locale["errors"]["bodies"]["ttf"], message_box::Type::Error);
+			Log::EngineCritical("Failed to initialise SDL_TTF: {}.", TTF_GetError());
+
+			return;
+		}
+
+		Log::EngineInfo("Text subsystem initialised.");
 
 		Input::SetGameControllerDeadzone(m_config["controls"]["controller-deadzone"]);
 

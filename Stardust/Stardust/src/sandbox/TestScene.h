@@ -61,9 +61,6 @@ public:
 
 	[[nodiscard]] virtual sd::Status OnLoad() override
 	{
-		sd::Log::Debug("{}", sd::Input::Mouse::GetButtonCount());
-		sd::Log::Debug("{}", sd::Input::GameController::GetButtonCount());
-		sd::Log::Debug("{}", sd::KeyCodeCount);
 		const auto textures = sd::vfs::GetAllFilesInDirectory("assets/textures");
 
 		for (const auto textureFile : textures)

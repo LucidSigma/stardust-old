@@ -207,6 +207,7 @@
     <ClInclude Include="src\stardust\scene\Scene.h" />
     <ClInclude Include="src\stardust\scene\SceneManager.h" />
     <ClInclude Include="src\stardust\Stardust.h" />
+    <ClInclude Include="src\stardust\text\font\Font.h" />
     <ClInclude Include="src\stardust\text\text_input\TextInput.h" />
     <ClInclude Include="src\stardust\text\clipboard\Clipboard.h" />
     <ClInclude Include="src\stardust\config\Config.h" />

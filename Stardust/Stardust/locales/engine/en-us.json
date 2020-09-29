@@ -6,6 +6,7 @@
       "next-scene": "Failed to load next scene.",
       "renderer": "Failed to create renderer.",
       "sound": "Failed to initialize sound system.",
+      "ttf": "Failed to initialize text system.",
       "window": "Failed to create window."
     },
     "titles": {
@@ -13,6 +14,7 @@
       "renderer": "Renderer Error",
       "scene": "Scene Error",
       "sound": "Sound Error",
+      "ttf": "Text Error",
       "window": "Window Error"
     }
   },

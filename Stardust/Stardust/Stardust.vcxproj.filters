@@ -209,5 +209,8 @@
     <ClInclude Include="src\stardust\utility\enums\Status.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\stardust\text\font\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
