@@ -19,7 +19,7 @@ void stardust::VolumeManager::SetVolume(const std::string& volumeName, const flo
 
 [[nodiscard]] float stardust::VolumeManager::GetVolume(const std::string& volumeName) const
 {
-	return m_volumes.at(std::string(volumeName));
+	return m_volumes.at(volumeName);
 }
 
 void stardust::VolumeManager::ResetVolume(const std::string& volumeName)
@@ -42,8 +42,8 @@ void stardust::VolumeManager::RemoveVolume(const std::string& volumeName)
 
 void stardust::VolumeManager::ClearAllVolumes()
 {
-	const float masterVolume = m_volumes[std::string(s_MasterVolumeName)];
+	const float masterVolume = m_volumes[GetMasterVolumeName()];
 
 	m_volumes.clear();
-	m_volumes[std::string(s_MasterVolumeName)] = masterVolume;
+	m_volumes[GetMasterVolumeName()] = masterVolume;
 }
