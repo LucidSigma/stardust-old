@@ -2,8 +2,10 @@
 #ifndef KEY_CODE_H
 #define KEY_CODE_H
 
+#include <cstddef>
 #include <type_traits>
 
+#include <magic_enum/magic_enum.hpp>
 #include <SDL2/SDL.h>
 
 namespace stardust
@@ -152,6 +154,8 @@ namespace stardust
 
 		AltGr = SDL_SCANCODE_MODE,
 	};
+
+	constexpr std::size_t KeyCodeCount = magic_enum::enum_count<KeyCode>();
 }
 
 #endif

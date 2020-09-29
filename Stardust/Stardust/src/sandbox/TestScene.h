@@ -44,23 +44,26 @@ struct Rotater
 };
 
 class TestScene
-	: public stardust::Scene
+	: public sd::Scene
 {
 private:
-	stardust::AssetManager<stardust::Texture> m_textures;
-	stardust::AssetManager<stardust::Sound> m_sounds;
+	sd::AssetManager<sd::Texture> m_textures;
+	sd::AssetManager<sd::Sound> m_sounds;
 
-	stardust::Entity m_drawable;
+	sd::Entity m_drawable;
 
 public:
-	TestScene(stardust::Application& application, const std::string& name)
-		: stardust::Scene(application, name)
+	TestScene(sd::Application& application, const std::string& name)
+		: sd::Scene(application, name)
 	{ }
 
 	virtual ~TestScene() noexcept override = default;
 
-	[[nodiscard]] virtual stardust::Status OnLoad() override
+	[[nodiscard]] virtual sd::Status OnLoad() override
 	{
+		sd::Log::Debug("{}", sd::Input::Mouse::GetButtonCount());
+		sd::Log::Debug("{}", sd::Input::GameController::GetButtonCount());
+		sd::Log::Debug("{}", sd::KeyCodeCount);
 		const auto textures = sd::vfs::GetAllFilesInDirectory("assets/textures");
 
 		for (const auto textureFile : textures)
@@ -70,25 +73,25 @@ public:
 
 			if (!m_textures[textureName].IsValid())
 			{
-				stardust::Log::Error("Texture \"{}\" failed to load.", textureFile);
+				sd::Log::Error("Texture \"{}\" failed to load.", textureFile);
 
-				return stardust::Status::Fail;
+				return sd::Status::Fail;
 			}
 
-			m_textures[textureName].SetScaleMode(stardust::Texture::ScaleMode::Nearest);
-			stardust::Log::Trace("Texture \"{}\" loaded successfully.", textureFile);
+			m_textures[textureName].SetScaleMode(sd::Texture::ScaleMode::Nearest);
+			sd::Log::Trace("Texture \"{}\" loaded successfully.", textureFile);
 		}
 
 		m_sounds.Add("test", "assets/sounds/test.wav");
 
 		if (!m_sounds["test"].IsValid())
 		{
-			stardust::Log::Error("Sound \"{}\" failed to load.", "assets/sounds/test.wav");
+			sd::Log::Error("Sound \"{}\" failed to load.", "assets/sounds/test.wav");
 
-			return stardust::Status::Fail;
+			return sd::Status::Fail;
 		}
 
-		stardust::Log::Trace("Sound \"{}\" loaded successfully.", "assets/sounds/test.wav");
+		sd::Log::Trace("Sound \"{}\" loaded successfully.", "assets/sounds/test.wav");
 
 		m_drawable = CreateEntity();
 		m_drawable.AddComponent<KeyboardControlled>(500.0f);
@@ -102,7 +105,7 @@ public:
 		m_drawable.AddComponent<Rotater>(250.0f);
 		m_drawable.AddComponent<sd_comp::SpriteRendererComponent>(m_textures["gear"]);
 
-		return stardust::Status::Success;
+		return sd::Status::Success;
 	}
 
 	virtual void OnUnload() noexcept override
@@ -136,7 +139,7 @@ public:
 
 	virtual void ProcessInput() override
 	{
-		if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::F11))
+		if (sd::Input::GetKeyboardState().IsKeyDown(sd::KeyCode::F11))
 		{
 			if (!m_application.GetWindow().IsFullscreen())
 			{
@@ -151,14 +154,14 @@ public:
 			}
 		}
 
-		stardust::SoundSource soundSource;
+		sd::SoundSource soundSource;
 
-		if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::Space))
+		if (sd::Input::GetKeyboardState().IsKeyDown(sd::KeyCode::Space))
 		{
-			m_sounds["test"].SetVolume(m_application.GetVolumeManager()[stardust::VolumeManager::GetMasterVolumeName()]);
+			m_sounds["test"].SetVolume(m_application.GetVolumeManager()[sd::VolumeManager::GetMasterVolumeName()]);
 			soundSource = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
 		}
-		else if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::B)) 
+		else if (sd::Input::GetKeyboardState().IsKeyDown(sd::KeyCode::B)) 
 		{
 			m_sounds["test"].SetVolume(0.25f);
 			soundSource = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
@@ -175,24 +178,24 @@ public:
 			velocity.x = 0.0f;
 			velocity.y = 0.0f;
 
-			const float multiplier = stardust::Input::GetKeyboardState().IsKeyPressed(stardust::KeyCode::LeftShift) ? 2.0f : 1.0f;
+			const float multiplier = sd::Input::GetKeyboardState().IsKeyPressed(sd::KeyCode::LeftShift) ? 2.0f : 1.0f;
 
-			if (stardust::Input::GetKeyboardState().IsAnyKeyPressed({ stardust::KeyCode::W, stardust::KeyCode::Up }))
+			if (sd::Input::GetKeyboardState().IsAnyKeyPressed({ sd::KeyCode::W, sd::KeyCode::Up }))
 			{
 				velocity.y -= keyboardController.speed * multiplier;
 			}
 
-			if (stardust::Input::GetKeyboardState().IsAnyKeyPressed({ stardust::KeyCode::S, stardust::KeyCode::Down }))
+			if (sd::Input::GetKeyboardState().IsAnyKeyPressed({ sd::KeyCode::S, sd::KeyCode::Down }))
 			{
 				velocity.y += keyboardController.speed * multiplier;
 			}
 
-			if (stardust::Input::GetKeyboardState().IsAnyKeyPressed({ stardust::KeyCode::A, stardust::KeyCode::Left }))
+			if (sd::Input::GetKeyboardState().IsAnyKeyPressed({ sd::KeyCode::A, sd::KeyCode::Left }))
 			{
 				velocity.x -= keyboardController.speed * multiplier;
 			}
 
-			if (stardust::Input::GetKeyboardState().IsAnyKeyPressed({ stardust::KeyCode::D, stardust::KeyCode::Right }))
+			if (sd::Input::GetKeyboardState().IsAnyKeyPressed({ sd::KeyCode::D, sd::KeyCode::Right }))
 			{
 				velocity.x += keyboardController.speed * multiplier;
 			}
@@ -204,7 +207,7 @@ public:
 		
 	}
 
-	virtual void Render(const stardust::Renderer& renderer) const override
+	virtual void Render(const sd::Renderer& renderer) const override
 	{
 		m_entityRegistry.sort<sd_comp::SpriteRendererComponent>([](const auto& lhs, const auto& rhs)
 		{

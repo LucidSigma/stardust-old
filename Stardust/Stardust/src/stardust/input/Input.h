@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include <magic_enum/magic_enum.hpp>
 #include <SDL2/SDL.h>
 
 #include "KeyCode.h"
@@ -59,6 +60,8 @@ namespace stardust
 			};
 
 		private:
+			static constexpr std::size_t s_ButtonCount = magic_enum::enum_count<Button>();
+
 			std::uint32_t m_currentButtonStates;
 			std::uint32_t m_previousButtonStates;
 
@@ -70,6 +73,8 @@ namespace stardust
 
 		public:
 			friend class Input;
+
+			inline static constexpr std::size_t GetButtonCount() { return s_ButtonCount; }
 
 			Mouse() = default;
 			~Mouse() noexcept = default;
@@ -168,6 +173,8 @@ namespace stardust
 				void operator ()(SDL_Haptic* const hapticDevice) const noexcept;
 			};
 
+			static constexpr std::size_t s_ButtonCount = magic_enum::enum_count<Button>();
+
 			int m_id = 0;
 			unsigned int m_playerIndex = 0u;
 
@@ -182,6 +189,8 @@ namespace stardust
 
 		public:
 			friend class Input;
+
+			inline static constexpr std::size_t GetButtonCount() { return s_ButtonCount; }
 
 			explicit GameController(const int id);
 			GameController(GameController&& other) noexcept;
