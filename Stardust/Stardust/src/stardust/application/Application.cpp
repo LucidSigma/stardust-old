@@ -15,7 +15,7 @@
 #include "../input/KeyCode.h"
 #include "../scene/Scene.h"
 #include "../text/text_input/TextInput.h"
-#include "../utility/enums/Enums.h"
+#include "../utility/enums/Status.h"
 #include "../vfs/VFS.h"
 
 namespace stardust

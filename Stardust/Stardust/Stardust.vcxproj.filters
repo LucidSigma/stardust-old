@@ -110,9 +110,6 @@
     <ClInclude Include="src\stardust\utility\cpu\CPU.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\stardust\utility\enums\Enums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\stardust\assets\AssetManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -207,6 +204,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\stardust\audio\volume\VolumeManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stardust\utility\enums\Status.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

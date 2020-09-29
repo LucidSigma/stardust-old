@@ -8,7 +8,7 @@
 #include <string_view>
 #include <vector>
 
-#include "../utility/enums/Enums.h"
+#include "../utility/enums/Status.h"
 
 namespace stardust
 {

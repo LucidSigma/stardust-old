@@ -211,7 +211,7 @@
     <ClInclude Include="src\stardust\text\clipboard\Clipboard.h" />
     <ClInclude Include="src\stardust\config\Config.h" />
     <ClInclude Include="src\stardust\utility\cpu\CPU.h" />
-    <ClInclude Include="src\stardust\utility\enums\Enums.h" />
+    <ClInclude Include="src\stardust\utility\enums\Status.h" />
     <ClInclude Include="src\stardust\utility\interfaces\INoncopyable.h" />
     <ClInclude Include="src\stardust\utility\interfaces\INonmovable.h" />
     <ClInclude Include="src\stardust\debug\logging\Log.h" />

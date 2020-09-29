@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ENUMS_H
-#define ENUMS_H
+#ifndef STATUS_H
+#define STATUS_H
 
 namespace stardust
 {

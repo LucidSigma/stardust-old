@@ -39,7 +39,7 @@
 #include "text/text_input/TextInput.h"
 
 #include "utility/cpu/CPU.h"
-#include "utility/enums/Enums.h"
+#include "utility/enums/Status.h"
 #include "utility/interfaces/INoncopyable.h"
 #include "utility/interfaces/INonmovable.h"
 #include "utility/random/Random.h"

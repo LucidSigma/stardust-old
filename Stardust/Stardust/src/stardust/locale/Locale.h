@@ -8,7 +8,7 @@
 
 #include <nlohmann/json.hpp>
 
-#include "../utility/enums/Enums.h"
+#include "../utility/enums/Status.h"
 
 namespace stardust
 {
