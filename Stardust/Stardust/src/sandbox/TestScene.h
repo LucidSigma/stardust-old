@@ -155,10 +155,10 @@ public:
 
 		if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::Space))
 		{
-			m_sounds["test"].SetVolume(1.0f);
+			m_sounds["test"].SetVolume(m_application.GetVolumeManager()[stardust::VolumeManager::GetMasterVolumeName()]);
 			soundSource = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
 		}
-		else if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::B))
+		else if (stardust::Input::GetKeyboardState().IsKeyDown(stardust::KeyCode::B)) 
 		{
 			m_sounds["test"].SetVolume(0.25f);
 			soundSource = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);

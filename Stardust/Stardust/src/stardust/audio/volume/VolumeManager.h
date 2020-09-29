@@ -31,6 +31,8 @@ namespace stardust
 		void RemoveVolume(const std::string& volumeName);
 		void ClearAllVolumes();
 
+		[[nodiscard]] inline float operator [](const std::string& volumeName) const { return GetVolume(volumeName); }
+
 		inline std::unordered_map<std::string, float>& GetVolumes() noexcept { return m_volumes; }
 		inline const std::unordered_map<std::string, float>& GetVolumes() const noexcept { return m_volumes; }
 	};

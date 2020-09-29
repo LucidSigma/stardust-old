@@ -101,11 +101,14 @@ namespace stardust
 
 		inline Config& GetConfig() noexcept { return m_config; }
 		inline Locale& GetLocale() noexcept { return m_locale; }
+		
 		inline Window& GetWindow() noexcept { return m_window; }
 		inline const Renderer& GetRenderer() const noexcept { return m_renderer; }
 		inline SceneManager& GetSceneManager() noexcept { return m_sceneManager; }
+
 		inline entt::registry& GetEntityRegistry() noexcept { return m_entityRegistry; }
 		inline SoundSystem& GetSoundSystem() noexcept { return m_soundSystem; }
+		inline VolumeManager& GetVolumeManager() noexcept { return m_volumeManager; }
 
 		[[nodiscard]] std::string GetPlatformName() const;
 
