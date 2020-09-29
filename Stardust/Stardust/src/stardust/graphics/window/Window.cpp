@@ -20,7 +20,7 @@ namespace stardust
 
 	void Window::SetMinimiseOnFullscreenFocusLoss(const bool minimiseOnFocusLoss)
 	{
-		SDL_setenv("SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS", minimiseOnFocusLoss ? "1" : "0", SDL_TRUE);
+		SDL_SetHintWithPriority(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, minimiseOnFocusLoss ? "1" : "0", SDL_HINT_OVERRIDE);
 	}
 
 	Window::Window()
