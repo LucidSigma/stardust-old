@@ -128,7 +128,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2-2.0.12\lib\x64;$(SolutionDir)dep\physfs-3.0.2\lib\Debug;$(SolutionDir)dep\box2d-2.4.0\lib\Debug;$(SolutionDir)dep\openal-soft-1.20.1\lib\Debug;$(SolutionDir)dep\soloud-2020.02.07\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;physfs-static.lib;box2d.lib;soloud_static_x64_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;physfs-static.lib;box2d.lib;soloud_static_x64_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,7 +149,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2-2.0.12\lib\x64;$(SolutionDir)dep\physfs-3.0.2\lib\Release;$(SolutionDir)dep\box2d-2.4.0\lib\Release;$(SolutionDir)dep\soloud-2020.02.07\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;physfs-static.lib;box2d.lib;soloud_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;physfs-static.lib;box2d.lib;soloud_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
