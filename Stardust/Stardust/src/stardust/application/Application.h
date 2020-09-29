@@ -18,6 +18,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "../audio/SoundSystem.h"
+#include "../audio/volume/VolumeManager.h"
 #include "../graphics/renderer/Renderer.h"
 #include "../locale/Locale.h"
 #include "../scene/SceneManager.h"
@@ -79,6 +80,7 @@ namespace stardust
 
 		entt::registry m_entityRegistry{ };
 		SoundSystem m_soundSystem;
+		VolumeManager m_volumeManager;
 
 		std::string m_screenshotDirectory;
 

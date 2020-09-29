@@ -11,6 +11,7 @@
 #include "audio/sounds/Sounds.h"
 #include "audio/SoundSource.h"
 #include "audio/SoundSystem.h"
+#include "audio/volume/VolumeManager.h"
 
 #include "config/Config.h"
 #include "debug/logging/Log.h"

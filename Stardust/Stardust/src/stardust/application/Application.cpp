@@ -178,6 +178,7 @@ namespace stardust
 			return;
 		}
 		
+		m_volumeManager.AddVolume(VolumeManager::GetMasterVolumeName(), m_config["audio"]["volumes"]["master"]);
 		Log::EngineInfo("Sound system initialised.");
 
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
