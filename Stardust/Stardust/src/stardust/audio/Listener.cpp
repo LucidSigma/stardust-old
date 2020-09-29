@@ -31,6 +31,14 @@ namespace stardust
 		return *this;
 	}
 
+	void Listener::Reset() noexcept
+	{
+		m_position = glm::vec3{ 0.0f, 0.0f, 0.0f };
+		m_lookAt = glm::vec3{ 0.0f, 0.0f, 0.0f };
+		m_upVector = glm::vec3{ 0.0f, 1.0f, 0.0f };
+		m_velocity = glm::vec3{ 0.0f, 0.0f, 0.0f };
+	}
+
 	void Listener::SetPosition(const glm::vec3& position) noexcept
 	{
 		m_position = position;

@@ -473,6 +473,7 @@ namespace stardust
 			m_sceneManager.CurrentScene()->OnUnload();
 			m_sceneManager.PopScene();
 			m_entityRegistry.clear();
+			m_soundSystem.GetListener().Reset();
 
 			if (!m_sceneManager.IsEmpty())
 			{

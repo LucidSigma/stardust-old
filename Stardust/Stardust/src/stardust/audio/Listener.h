@@ -26,6 +26,8 @@ namespace stardust
 		Listener& operator =(Listener&& other) noexcept;
 		~Listener() noexcept = default;
 
+		void Reset() noexcept;
+
 		inline const glm::vec3& GetPosition() const noexcept { return m_position; }
 		void SetPosition(const glm::vec3& position) noexcept;
 
