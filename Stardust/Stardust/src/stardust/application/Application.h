@@ -5,8 +5,10 @@
 #include "../utility/interfaces/INoncopyable.h"
 #include "../utility/interfaces/INonmovable.h"
 
+#include <any>
 #include <atomic>
 #include <cstdint>
+#include <unordered_map>
 #include <string>
 #include <string_view>
 
@@ -80,6 +82,8 @@ namespace stardust
 
 		std::string m_screenshotDirectory;
 
+		std::unordered_map<std::string, std::any> m_globalSceneData{ };
+
 	public:
 		Application(const CreateInfo& createInfo);
 		~Application() noexcept;
@@ -106,6 +110,17 @@ namespace stardust
 		inline bool IsRunning() const noexcept { return m_isRunning; }
 		inline float GetElapsedTime() const noexcept { return m_elapsedTime; }
 		inline bool HasWindowFocus() const noexcept { return m_hasWindowFocus; }
+
+		template <typename T>
+		void SetGlobalSceneData(const std::string& dataName, const T& data)
+		{
+			m_globalSceneData[dataName] = data;
+		}
+
+		std::any& GetFromGlobalSceneData(const std::string& dataName);
+		void RemoveFromGlobalSceneData(const std::string& dataName);
+
+		inline std::unordered_map<std::string, std::any>& GetGlobalSceneData() noexcept { return m_globalSceneData; }
 
 	private:
 		void Initialise(const CreateInfo& createInfo);

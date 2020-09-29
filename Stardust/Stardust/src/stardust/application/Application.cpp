@@ -118,6 +118,16 @@ namespace stardust
 		return SDL_GetPlatform();
 	}
 
+	std::any& Application::GetFromGlobalSceneData(const std::string& dataName)
+	{
+		return m_globalSceneData[dataName];
+	}
+
+	void Application::RemoveFromGlobalSceneData(const std::string& dataName)
+	{
+		m_globalSceneData.erase(dataName);
+	}
+
 	void Application::Initialise(const CreateInfo& createInfo)
 	{
 	#ifndef NDEBUG
