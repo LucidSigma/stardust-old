@@ -167,6 +167,7 @@
     <ClCompile Include="src\stardust\scene\entity\Entity.cpp" />
     <ClCompile Include="src\stardust\scene\Scene.cpp" />
     <ClCompile Include="src\stardust\scene\SceneManager.cpp" />
+    <ClCompile Include="src\stardust\text\font\Font.cpp" />
     <ClCompile Include="src\stardust\text\text_input\TextInput.cpp" />
     <ClCompile Include="src\stardust\text\clipboard\Clipboard.cpp" />
     <ClCompile Include="src\stardust\config\Config.cpp" />

@@ -15,9 +15,6 @@ namespace stardust
 		SDL_DestroyTexture(texture);
 	}
 
-	Texture::Texture()
-	{ }
-
 	Texture::Texture(const Renderer& renderer, const std::string_view& filepath)
 	{
 		Initialise(renderer, filepath);

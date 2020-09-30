@@ -49,6 +49,7 @@ class TestScene
 private:
 	sd::AssetManager<sd::Texture> m_textures;
 	sd::AssetManager<sd::Sound> m_sounds;
+	sd::AssetManager<sd::Font> m_fonts;
 
 	sd::Entity m_drawable;
 
@@ -89,6 +90,17 @@ public:
 		}
 
 		sd::Log::Trace("Sound \"{}\" loaded successfully.", "assets/sounds/test.wav");
+
+		m_fonts.Add("arial", "assets/fonts/arial.ttf", 16u);
+
+		if (!m_fonts["arial"].IsValid())
+		{
+			sd::Log::Error("Font \"{}\" failed to load.", "assets/fonts/arial.ttf");
+
+			return sd::Status::Fail;
+		}
+		
+		sd::Log::Trace("Font \"{}\" loaded successfully.", "assets/fonts/arial.ttf");
 
 		m_drawable = CreateEntity();
 		m_drawable.AddComponent<KeyboardControlled>(500.0f);

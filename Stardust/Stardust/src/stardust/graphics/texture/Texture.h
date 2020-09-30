@@ -55,7 +55,7 @@ namespace stardust
 		bool m_isLocked = false;
 
 	public:
-		Texture();
+		Texture() = default;
 		Texture(const Renderer& renderer, const std::string_view& filepath);
 		Texture(const Renderer& renderer, const std::uint32_t format, const AccessType accessType, const glm::uvec2& size);
 
