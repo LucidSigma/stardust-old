@@ -51,6 +51,8 @@ namespace stardust
 		
 		if (m_fontFileRWOps == nullptr)
 		{
+			m_fontFileData.clear();
+
 			return;
 		}
 		
@@ -59,6 +61,12 @@ namespace stardust
 		if (m_handle != nullptr)
 		{
 			m_pointSize = pointSize;
+		}
+		else
+		{
+			SDL_RWclose(m_fontFileRWOps);
+			m_fontFileRWOps = nullptr;
+			m_fontFileData.clear();
 		}
 	}
 
