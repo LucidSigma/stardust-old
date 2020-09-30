@@ -100,7 +100,7 @@ public:
 			return sd::Status::Fail;
 		}
 
-		m_textures.Add("text", sd::text::RenderText(m_application.GetRenderer(), m_fonts["arial"], "This is some text.", sd::colours::White));
+		m_textures.Add("text", sd::text::RenderTextWithOutline(m_application.GetRenderer(), m_fonts["arial"], "This is some text.", sd::colours::Pink, 4u, sd::colours::Purple));
 
 		sd::Log::Trace("Font \"{}\" loaded successfully.", "assets/fonts/arial.ttf");
 
