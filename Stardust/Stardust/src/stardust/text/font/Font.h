@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <glm/glm.hpp>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
 namespace stardust
@@ -53,6 +54,9 @@ namespace stardust
 		};
 
 		std::unique_ptr<TTF_Font, FontDestroyer> m_handle = nullptr;
+		std::vector<std::byte> m_fontFileData{ };
+		SDL_RWops* m_fontFileRWOps = nullptr;
+
 		unsigned int m_pointSize = 0u;
 
 	public:

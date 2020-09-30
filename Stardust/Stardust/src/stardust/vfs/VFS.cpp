@@ -119,7 +119,7 @@ namespace stardust
 			return fileData;
 		}
 
-		Status WriteToFile(const std::string_view& filepath, const std::vector<std::byte>& data)
+		[[nodiscard]] Status WriteToFile(const std::string_view& filepath, const std::vector<std::byte>& data)
 		{
 			PHYSFS_File* file = PHYSFS_openWrite(filepath.data());
 
@@ -142,7 +142,7 @@ namespace stardust
 			return Status::Success;
 		}
 
-		Status WriteToFile(const std::string_view& filepath, const std::string& data)
+		[[nodiscard]] Status WriteToFile(const std::string_view& filepath, const std::string& data)
 		{
 			PHYSFS_File* file = PHYSFS_openWrite(filepath.data());
 
@@ -165,7 +165,7 @@ namespace stardust
 			return Status::Success;
 		}
 
-		Status AppendToFile(const std::string_view& filepath, const std::vector<std::byte>& data)
+		[[nodiscard]] Status AppendToFile(const std::string_view& filepath, const std::vector<std::byte>& data)
 		{
 			PHYSFS_File* file = PHYSFS_openAppend(filepath.data());
 
@@ -188,7 +188,7 @@ namespace stardust
 			return Status::Success;
 		}
 
-		Status AppendToFile(const std::string_view& filepath, const std::string& data)
+		[[nodiscard]] Status AppendToFile(const std::string_view& filepath, const std::string& data)
 		{
 			PHYSFS_File* file = PHYSFS_openAppend(filepath.data());
 

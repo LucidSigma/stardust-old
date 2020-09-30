@@ -1,17 +1,16 @@
-[14:48:40] [info] STARDUST: Logger initialised.
-[14:48:40] [debug] STARDUST: Platform detected: "Windows".
-[14:48:40] [info] STARDUST: ECS initialised.
-[14:48:40] [info] STARDUST: Virtual filesystem initialised.
-[14:48:40] [info] STARDUST: Config loaded.
-[14:48:40] [info] STARDUST: Locale "en-gb" loaded.
-[14:48:40] [info] STARDUST: Sound system initialised.
-[14:48:40] [info] STARDUST: SDL initialised.
-[14:48:40] [info] STARDUST: Window created.
-[14:48:40] [info] STARDUST: Renderer created without VSync.
-[14:48:40] [info] STARDUST: Text subsystem initialised.
-[14:48:40] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
-[14:48:40] [trace] CLIENT: Texture "assets/textures/gear2.png" loaded successfully.
-[14:48:40] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
-[14:48:40] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
-[14:48:40] [trace] STARDUST: Initial scene "Test" loaded.
-[14:48:42] [trace] STARDUST: Scene "Test" finished.
+[18:23:04] [info] STARDUST: Logger initialised.
+[18:23:04] [debug] STARDUST: Platform detected: "Windows".
+[18:23:04] [info] STARDUST: ECS initialised.
+[18:23:04] [info] STARDUST: Virtual filesystem initialised.
+[18:23:04] [info] STARDUST: Config loaded.
+[18:23:04] [info] STARDUST: Locale "en-gb" loaded.
+[18:23:04] [info] STARDUST: Sound system initialised.
+[18:24:44] [info] STARDUST: SDL initialised.
+[18:24:44] [info] STARDUST: Window created.
+[18:24:44] [info] STARDUST: Renderer created without VSync.
+[18:24:44] [info] STARDUST: Text subsystem initialised.
+[18:24:44] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
+[18:24:44] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
+[18:24:44] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
+[18:24:44] [trace] STARDUST: Initial scene "Test" loaded.
+[18:25:18] [trace] STARDUST: Scene "Test" finished.

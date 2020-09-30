@@ -40,13 +40,21 @@ namespace stardust
 
 	void Font::Initialise(const std::string_view& fontFilepath, const unsigned int pointSize)
 	{
-		const std::vector<std::byte> fontFileData = vfs::ReadFileData(fontFilepath);
-		SDL_RWops* fontRW = SDL_RWFromConstMem(fontFileData.data(), static_cast<int>(fontFileData.size()));
-
-		m_handle = std::unique_ptr<TTF_Font, FontDestroyer>(TTF_OpenFontRW(fontRW, SDL_FALSE, static_cast<int>(pointSize)));
-
-		SDL_RWclose(fontRW);
-		fontRW = nullptr;
+		m_fontFileData = vfs::ReadFileData(fontFilepath);
+		
+		if (m_fontFileData.empty())
+		{
+			return;
+		}
+		
+		m_fontFileRWOps = SDL_RWFromConstMem(m_fontFileData.data(), static_cast<int>(m_fontFileData.size()));
+		
+		if (m_fontFileRWOps == nullptr)
+		{
+			return;
+		}
+		
+		m_handle = std::unique_ptr<TTF_Font, FontDestroyer>(TTF_OpenFontRW(m_fontFileRWOps, SDL_FALSE, static_cast<int>(pointSize)));
 
 		if (m_handle != nullptr)
 		{
@@ -59,6 +67,10 @@ namespace stardust
 		if (m_handle != nullptr)
 		{
 			m_handle = nullptr;
+
+			SDL_RWclose(m_fontFileRWOps);
+			m_fontFileRWOps = nullptr;
+			m_fontFileData.clear();
 
 			m_pointSize = 0u;
 		}

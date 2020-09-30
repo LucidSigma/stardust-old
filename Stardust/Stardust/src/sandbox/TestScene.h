@@ -91,7 +91,7 @@ public:
 
 		sd::Log::Trace("Sound \"{}\" loaded successfully.", "assets/sounds/test.wav");
 
-		m_fonts.Add("arial", "assets/fonts/arial.ttf", 16u);
+		m_fonts.Add("arial", "assets/fonts/arial.ttf", 64u);
 
 		if (!m_fonts["arial"].IsValid())
 		{
@@ -99,7 +99,9 @@ public:
 
 			return sd::Status::Fail;
 		}
-		
+
+		m_textures.Add("text", sd::text::RenderText(m_application.GetRenderer(), m_fonts["arial"], "This is some text.", sd::colours::White));
+
 		sd::Log::Trace("Font \"{}\" loaded successfully.", "assets/fonts/arial.ttf");
 
 		m_drawable = CreateEntity();
@@ -236,6 +238,8 @@ public:
 				std::nullopt
 			);
 		});
+
+		renderer.DrawTexture(m_textures["text"], std::nullopt, glm::vec2{ 10.0f, 10.0f }, glm::vec2{ 1.0f, 1.0f });
 	}
 };
 

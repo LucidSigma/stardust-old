@@ -20,6 +20,11 @@ namespace stardust
 		Initialise(renderer, filepath);
 	}
 
+	Texture::Texture(const Renderer& renderer, SDL_Surface* const surface)
+	{
+		Initialise(renderer, surface);
+	}
+
 	Texture::Texture(const Renderer& renderer, const std::uint32_t format, const AccessType accessType, const glm::uvec2& size)
 	{
 		Initialise(renderer, format, accessType, size);
@@ -102,6 +107,21 @@ namespace stardust
 		{
 			m_renderer = &renderer;
 			m_size = glm::uvec2{ width, height };
+
+			int accessType = 0;
+			SDL_QueryTexture(GetRawHandle(), &m_format, &accessType, nullptr, nullptr);
+			m_accessType = static_cast<AccessType>(accessType);
+		}
+	}
+
+	void Texture::Initialise(const Renderer& renderer, SDL_Surface* const surface)
+	{
+		m_handle = std::unique_ptr<SDL_Texture, TextureDestroyer>(SDL_CreateTextureFromSurface(renderer.GetRawHandle(), surface));
+
+		if (m_handle != nullptr)
+		{
+			m_renderer = &renderer;
+			m_size = glm::uvec2{ surface->w, surface->h };
 
 			int accessType = 0;
 			SDL_QueryTexture(GetRawHandle(), &m_format, &accessType, nullptr, nullptr);

@@ -8,6 +8,8 @@
 #include <string_view>
 #include <vector>
 
+#include <SDL2/SDL.h>
+
 #include "../utility/enums/Status.h"
 
 namespace stardust
@@ -37,6 +39,8 @@ namespace stardust
 		[[nodiscard]] extern Status WriteToFile(const std::string_view& filepath, const std::string& data);
 		[[nodiscard]] extern Status AppendToFile(const std::string_view& filepath, const std::vector<std::byte>& data);
 		[[nodiscard]] extern Status AppendToFile(const std::string_view& filepath, const std::string& data);
+
+		[[nodiscard]] extern SDL_RWops* OpenRWOps(const std::string_view& filepath);
 	}
 }
 

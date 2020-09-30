@@ -57,6 +57,7 @@ namespace stardust
 	public:
 		Texture() = default;
 		Texture(const Renderer& renderer, const std::string_view& filepath);
+		Texture(const Renderer& renderer, SDL_Surface* const surface);
 		Texture(const Renderer& renderer, const std::uint32_t format, const AccessType accessType, const glm::uvec2& size);
 
 		Texture(Texture&& other) noexcept;
@@ -65,6 +66,7 @@ namespace stardust
 		~Texture() noexcept;
 
 		void Initialise(const Renderer& renderer, const std::string_view& filepath);
+		void Initialise(const Renderer& renderer, SDL_Surface* const surface);
 		void Initialise(const Renderer& renderer, const std::uint32_t format, const AccessType accessType, const glm::uvec2& size);
 		void Destroy() noexcept;
 

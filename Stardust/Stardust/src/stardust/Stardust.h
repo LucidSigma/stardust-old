@@ -38,6 +38,7 @@
 #include "text/clipboard/Clipboard.h"
 #include "text/font/Font.h"
 #include "text/text_input/TextInput.h"
+#include "text/Text.h"
 
 #include "utility/cpu/CPU.h"
 #include "utility/enums/Status.h"
