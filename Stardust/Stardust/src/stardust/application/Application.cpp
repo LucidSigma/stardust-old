@@ -37,7 +37,7 @@ namespace stardust
 		m_window.Destroy();
 
 		vfs::Quit();
-		
+
 		TTF_Quit();
 		SDL_Quit();
 	}
@@ -142,99 +142,24 @@ namespace stardust
 		Log::EngineDebug("Platform detected: \"{}\".", GetPlatformName());
 		Log::EngineInfo("ECS initialised.");
 
-		if (!vfs::Initialise(createInfo.filesystem.argv0))
+		static const std::vector<std::function<bool(Application* const, const CreateInfo&)>> initialisationFunctions{
+			&Application::InitialiseVFS,
+			&Application::InitialiseConfig,
+			&Application::InitialiseLocale,
+			&Application::InitialiseSoundSystem,
+			&Application::InitialiseSDL,
+			&Application::InitialiseWindow,
+			&Application::InitialiseRenderer,
+			&Application::InitialiseTextSystem,
+		};
+
+		for (const auto& initialisationFunction : initialisationFunctions)
 		{
-			message_box::Show("Filesystem Error", "Virtual filesystem failed to initialise.", message_box::Type::Error);
-			Log::EngineError("Failed to initialise virtual filesystem.");
-
-			return;
+			if (!initialisationFunction(this, createInfo))
+			{
+				return;
+			}
 		}
-
-		vfs::AddToSearchPath({ createInfo.filesystem.assetsArchive, createInfo.filesystem.localesArchive });
-		Log::EngineInfo("Virtual filesystem initialised.");
-
-		if (m_config.Initialise(createInfo.filepaths.config) == Status::Fail)
-		{
-			message_box::Show("Config Error", "Config file is invalid.", message_box::Type::Error);
-			Log::EngineError("Failed to load config file at {}.", createInfo.filepaths.config);
-
-			return;
-		}
-
-		Log::EngineInfo("Config loaded.");
-		m_locale.Initialise("locales/engine", "locales/client");
-
-		if (m_locale.SetLocale(m_config["locale"]) == Status::Fail)
-		{
-			message_box::Show("Locale Error", "Failed to load initial locale files.", message_box::Type::Error);
-			Log::EngineError("Failed to load locale files for initial locale {}.", m_config["locale"]);
-
-			return;
-		}
-
-		Log::EngineInfo("Locale \"{}\" loaded.", m_locale.GetCurrentLocaleName());
-
-		if (!m_soundSystem.DidInitialiseSuccessfully())
-		{
-			message_box::Show(m_locale["errors"]["titles"]["sound"], m_locale["errors"]["bodies"]["sound"], message_box::Type::Error);
-			Log::EngineCritical("Failed to initialise sound system.");
-
-			return;
-		}
-		
-		m_volumeManager.AddVolume(VolumeManager::GetMasterVolumeName(), m_config["audio"]["volumes"]["master"]);
-		Log::EngineInfo("Sound system initialised.");
-
-		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-		{
-			message_box::Show(m_locale["errors"]["titles"]["initialise"], m_locale["errors"]["bodies"]["initialise-sdl"], message_box::Type::Error);
-			Log::EngineCritical("Failed to initialise SDL: {}.", SDL_GetError());
-
-			return;
-		}
-
-		Log::EngineInfo("SDL initialised.");
-
-		InitialiseWindow(createInfo);
-
-		if (!m_window.IsValid())
-		{
-			message_box::Show(m_locale["errors"]["titles"]["window"], m_locale["errors"]["bodies"]["window"], message_box::Type::Error);
-			Log::EngineCritical("Failed to create window: {}.", SDL_GetError());
-
-			return;
-		}
-
-		m_window.SetIcon(createInfo.filepaths.windowIcon, m_locale);
-
-		Log::EngineInfo("Window created.");
-
-		m_renderer.Initialise(m_window, Renderer::CreateInfo{
-			.presentVSync = m_config["frame-rate"]["enable-vsync"],
-			.allowRenderToTexture = createInfo.requireRenderToTexture,
-			.blendMode = Renderer::BlendMode::Alpha,
-		});
-
-		if (!m_renderer.IsValid())
-		{
-			message_box::Show(m_locale["errors"]["titles"]["renderer"], m_locale["errors"]["bodies"]["renderer"], message_box::Type::Error);
-			Log::EngineCritical("Failed to create renderer: {}.", SDL_GetError());
-
-			return;
-		}
-
-		m_renderer.SetLogicalSize(createInfo.rendererLogicalSize);
-		Log::EngineInfo("Renderer created {} VSync.", m_config["frame-rate"]["enable-vsync"] ? "with" : "without");
-
-		if (TTF_Init() != 0)
-		{
-			message_box::Show(m_locale["errors"]["titles"]["ttf"], m_locale["errors"]["bodies"]["ttf"], message_box::Type::Error);
-			Log::EngineCritical("Failed to initialise SDL_TTF: {}.", TTF_GetError());
-
-			return;
-		}
-
-		Log::EngineInfo("Text subsystem initialised.");
 
 		Input::SetGameControllerDeadzone(m_config["controls"]["controller-deadzone"]);
 
@@ -245,7 +170,86 @@ namespace stardust
 		m_didInitialiseSuccessfully = true;
 	}
 
-	void Application::InitialiseWindow(const CreateInfo& createInfo)
+	bool Application::InitialiseVFS(const CreateInfo& createInfo)
+	{
+		if (!vfs::Initialise(createInfo.filesystem.argv0))
+		{
+			message_box::Show("Filesystem Error", "Virtual filesystem failed to initialise.", message_box::Type::Error);
+			Log::EngineError("Failed to initialise virtual filesystem.");
+
+			return false;
+		}
+
+		vfs::AddToSearchPath({ createInfo.filesystem.assetsArchive, createInfo.filesystem.localesArchive });
+		Log::EngineInfo("Virtual filesystem initialised.");
+
+		return true;
+	}
+
+	bool Application::InitialiseConfig(const CreateInfo& createInfo)
+	{
+		if (m_config.Initialise(createInfo.filepaths.config) == Status::Fail)
+		{
+			message_box::Show("Config Error", "Config file is invalid.", message_box::Type::Error);
+			Log::EngineError("Failed to load config file at {}.", createInfo.filepaths.config);
+
+			return false;
+		}
+
+		Log::EngineInfo("Config loaded.");
+
+		return true;
+	}
+
+	bool Application::InitialiseLocale(const CreateInfo&)
+	{
+		m_locale.Initialise("locales/engine", "locales/client");
+
+		if (m_locale.SetLocale(m_config["locale"]) == Status::Fail)
+		{
+			message_box::Show("Locale Error", "Failed to load initial locale files.", message_box::Type::Error);
+			Log::EngineError("Failed to load locale files for initial locale {}.", m_config["locale"]);
+
+			return false;
+		}
+
+		Log::EngineInfo("Locale \"{}\" loaded.", m_locale.GetCurrentLocaleName());
+
+		return true;
+	}
+
+	bool Application::InitialiseSoundSystem(const CreateInfo&)
+	{
+		if (!m_soundSystem.DidInitialiseSuccessfully())
+		{
+			message_box::Show(m_locale["errors"]["titles"]["sound"], m_locale["errors"]["bodies"]["sound"], message_box::Type::Error);
+			Log::EngineCritical("Failed to initialise sound system.");
+
+			return false;
+		}
+
+		m_volumeManager.AddVolume(VolumeManager::GetMasterVolumeName(), m_config["audio"]["volumes"]["master"]);
+		Log::EngineInfo("Sound system initialised.");
+
+		return true;
+	}
+
+	bool Application::InitialiseSDL(const CreateInfo&)
+	{
+		if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+		{
+			message_box::Show(m_locale["errors"]["titles"]["initialise"], m_locale["errors"]["bodies"]["initialise-sdl"], message_box::Type::Error);
+			Log::EngineCritical("Failed to initialise SDL: {}.", SDL_GetError());
+
+			return false;
+		}
+
+		Log::EngineInfo("SDL initialised.");
+
+		return true;
+	}
+
+	bool Application::InitialiseWindow(const CreateInfo& createInfo)
 	{
 		Window::SetMinimiseOnFullscreenFocusLoss(m_config["graphics"]["enable-fullscreen-minimise"]);
 
@@ -268,6 +272,56 @@ namespace stardust
 			.size = glm::uvec2{ m_config["window"]["size"]["width"], m_config["window"]["size"]["height"] },
 			.flags = std::move(windowCreateFlags),
 		});
+
+		if (!m_window.IsValid())
+		{
+			message_box::Show(m_locale["errors"]["titles"]["window"], m_locale["errors"]["bodies"]["window"], message_box::Type::Error);
+			Log::EngineCritical("Failed to create window: {}.", SDL_GetError());
+
+			return false;
+		}
+
+		m_window.SetIcon(createInfo.filepaths.windowIcon, m_locale);
+		Log::EngineInfo("Window created.");
+
+		return true;
+	}
+
+	bool Application::InitialiseRenderer(const CreateInfo& createInfo)
+	{
+		m_renderer.Initialise(m_window, Renderer::CreateInfo{
+			.presentVSync = m_config["frame-rate"]["enable-vsync"],
+			.allowRenderToTexture = createInfo.requireRenderToTexture,
+			.blendMode = Renderer::BlendMode::Alpha,
+							  });
+
+		if (!m_renderer.IsValid())
+		{
+			message_box::Show(m_locale["errors"]["titles"]["renderer"], m_locale["errors"]["bodies"]["renderer"], message_box::Type::Error);
+			Log::EngineCritical("Failed to create renderer: {}.", SDL_GetError());
+
+			return false;
+		}
+
+		m_renderer.SetLogicalSize(createInfo.rendererLogicalSize);
+		Log::EngineInfo("Renderer created {} VSync.", m_config["frame-rate"]["enable-vsync"] ? "with" : "without");
+
+		return true;
+	}
+
+	bool Application::InitialiseTextSystem(const CreateInfo& createInfo)
+	{
+		if (TTF_Init() != 0)
+		{
+			message_box::Show(m_locale["errors"]["titles"]["ttf"], m_locale["errors"]["bodies"]["ttf"], message_box::Type::Error);
+			Log::EngineCritical("Failed to initialise SDL_TTF: {}.", TTF_GetError());
+
+			return false;
+		}
+
+		Log::EngineInfo("Text subsystem initialised.");
+
+		return true;
 	}
 
 	void Application::InitialiseScenes()

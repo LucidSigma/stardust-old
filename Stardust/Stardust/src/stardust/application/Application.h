@@ -8,9 +8,9 @@
 #include <any>
 #include <atomic>
 #include <cstdint>
-#include <unordered_map>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 
 #include <entt/entt.hpp>
 #include <glm/glm.hpp>
@@ -19,11 +19,11 @@
 
 #include "../audio/SoundSystem.h"
 #include "../audio/volume/VolumeManager.h"
+#include "../config/Config.h"
 #include "../graphics/renderer/Renderer.h"
+#include "../graphics/window/Window.h"
 #include "../locale/Locale.h"
 #include "../scene/SceneManager.h"
-#include "../config/Config.h"
-#include "../graphics/window/Window.h"
 
 namespace stardust
 {
@@ -129,7 +129,14 @@ namespace stardust
 
 	private:
 		void Initialise(const CreateInfo& createInfo);
-		void InitialiseWindow(const CreateInfo& createInfo);
+		bool InitialiseVFS(const CreateInfo& createInfo);
+		bool InitialiseConfig(const CreateInfo& createInfo);
+		bool InitialiseLocale(const CreateInfo&);
+		bool InitialiseSoundSystem(const CreateInfo&);
+		bool InitialiseSDL(const CreateInfo&);
+		bool InitialiseWindow(const CreateInfo& createInfo);
+		bool InitialiseRenderer(const CreateInfo& createInfo);
+		bool InitialiseTextSystem(const CreateInfo&);
 		void InitialiseScenes();
 
 		void PollEvents(SDL_Event& event);
