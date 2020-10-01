@@ -1,5 +1,8 @@
 #include "ParticleSystem.h"
 
+#include <cstdint>
+#include <optional>
+
 #include <glm/gtx/compatibility.hpp>
 
 #include "../rect/Rect.h"
@@ -14,61 +17,77 @@ namespace stardust
 
 	void ParticleSystem::Update(const float deltaTime)
 	{
-		for (auto& particle : m_particlePool)
+		std::vector<std::size_t> particlesToRemove{ };
+
+		for (auto& [particleID, particle] : m_activeParticles)
 		{
-			if (!particle.isActive)
+			if (particle->lifetimeRemaining <= 0.0f)
 			{
-				continue;
+				particle->isActive = false;
 			}
 
-			if (particle.lifetimeRemaining <= 0.0f)
+			if (!particle->isActive)
 			{
-				particle.isActive = false;
+				particlesToRemove.push_back(particleID);
 
 				continue;
-			}
+			}			
 
-			particle.lifetimeRemaining -= deltaTime;
-			particle.velocity *= 1.0f + (particle.acceleration * deltaTime);
-			particle.angularVelocity *= 1.0f + (particle.angularAcceleration * deltaTime);
+			particle->lifetimeRemaining -= deltaTime;
+			particle->velocity *= 1.0f + (particle->velocityUpdateMultipler * deltaTime);
+			particle->angularVelocity *= 1.0f + (particle->angularVelocityUpdateMultipler * deltaTime);
 
-			particle.position += particle.velocity * deltaTime;
-			particle.rotation += particle.angularVelocity * deltaTime;
-			particle.size *= 1.0f + (particle.sizeUpdateMultipler * deltaTime);
+			particle->position += particle->velocity * deltaTime;
+			particle->rotation += particle->angularVelocity * deltaTime;
+			particle->size *= 1.0f + (particle->sizeUpdateMultipler * deltaTime);
 
-			particle.currentColour = Vec4ToColour(
+			particle->currentColour = Vec4ToColour(
 				glm::lerp(
-					ColourToVec4(particle.endColour),
-					ColourToVec4(particle.startColour),
-					particle.lifetimeRemaining / particle.lifetime
+					ColourToVec4(particle->endColour),
+					ColourToVec4(particle->startColour),
+					particle->lifetimeRemaining / particle->lifetime
 				)
 			);
+		}
+
+		for (const std::size_t particleID : particlesToRemove)
+		{
+			m_activeParticles.erase(particleID);
 		}
 	}
 
 	void ParticleSystem::Render(const Renderer& renderer) const
 	{
-		for (const auto& particle : m_particlePool)
+		for (const auto& [particleID, particle] : m_activeParticles)
 		{
-			if (!particle.isActive)
+			if (!particle->isActive)
 			{
 				continue;
 			}
 
 			const rect::Rect sourceRect = rect::Create(
-				static_cast<int>(particle.position.x),
-				static_cast<int>(particle.position.y),
-				static_cast<unsigned int>(particle.size.x),
-				static_cast<unsigned int>(particle.size.y)
+				static_cast<int>(particle->position.x),
+				static_cast<int>(particle->position.y),
+				static_cast<unsigned int>(particle->size.x),
+				static_cast<unsigned int>(particle->size.y)
 			);
 
-			if (particle.texture == nullptr)
+			if (particle->texture == nullptr)
 			{
-				renderer.DrawRect(sourceRect, particle.currentColour);
+				renderer.DrawRect(sourceRect, particle->currentColour);
 			}
 			else
 			{
-				renderer.DrawRotatedTexture(*particle.texture, std::nullopt, particle.position, particle.size / static_cast<glm::vec2>(particle.texture->GetSize()), particle.rotation, std::nullopt);
+				const auto [originalRed, originalGreen, originalBlue] = particle->texture->GetColourMod();
+				const std::uint8_t originalAlpha = particle->texture->GetAlphaMod();
+
+				particle->texture->SetColourMod(particle->currentColour.r, particle->currentColour.g, particle->currentColour.b);
+				particle->texture->SetAlphaMod(particle->currentColour.a);
+
+				renderer.DrawRotatedTexture(*particle->texture, std::nullopt, particle->position, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation, std::nullopt);
+
+				particle->texture->SetColourMod(originalRed, originalGreen, originalBlue);
+				particle->texture->SetAlphaMod(originalAlpha);
 			}
 		}
 	}
@@ -82,10 +101,10 @@ namespace stardust
 
 		particle.velocity.x = Random::GenerateFloat(particleData.minVelocity.x, particleData.maxVelocity.x);
 		particle.velocity.y = Random::GenerateFloat(particleData.minVelocity.y, particleData.maxVelocity.y);
-		particle.acceleration = particleData.acceleration;
+		particle.velocityUpdateMultipler = particleData.velocityUpdateMultipler;
 
 		particle.angularVelocity = Random::GenerateFloat(particleData.minAngularVelocity, particleData.maxAngularVelocity);
-		particle.angularAcceleration = particleData.angularAcceleration;
+		particle.angularVelocityUpdateMultipler = particleData.angularVelocityUpdateMultipler;
 
 		particle.size.x = Random::GenerateFloat(particleData.minSize.x, particleData.maxSize.x);
 		particle.size.y = particleData.keepAsSquare ? particle.size.x : Random::GenerateFloat(particleData.minSize.y, particleData.maxSize.y);
@@ -101,7 +120,14 @@ namespace stardust
 
 		particle.isActive = true;
 
+		m_activeParticles.insert({ m_particlePoolIndex, &m_particlePool[m_particlePoolIndex] });
+
 		--m_particlePoolIndex;
 		m_particlePoolIndex %= s_ParticleCount;
+	}
+
+	void ParticleSystem::KillAllParticles()
+	{
+		m_activeParticles.clear();
 	}
 }

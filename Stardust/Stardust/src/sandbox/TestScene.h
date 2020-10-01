@@ -180,6 +180,11 @@ public:
 			soundSource = m_application.GetSoundSystem().PlaySound(m_sounds["test"]);
 		}
 
+		if (sd::Input::GetKeyboardState().IsKeyDown(sd::KeyCode::Enter))
+		{
+			m_particles.KillAllParticles();
+		}
+
 		if (soundSource.HasValidHandle())
 		{
 			soundSource.SetRelativePlaySpeed(0.4f);
@@ -219,25 +224,25 @@ public:
 	{
 		m_particleCounter += deltaTime;
 
-		if (m_particleCounter >= 0.1f)
+		if (m_particleCounter >= 0.05f)
 		{
 			m_particleCounter = 0.0f;
-			m_particles.Emit(stardust::ParticleSystem::ParticleData{
+			m_particles.Emit(sd::ParticleSystem::ParticleData{
 				.initialPosition = m_application.GetRenderer().GetLogicalSize() / 2u,
 				.initialRotation = 0.0f,
-				.minVelocity = { -80.0f, -80.0f },
-				.maxVelocity = { 80.0f, 80.0f },
-				.acceleration = 0.1f,
+				.minVelocity = { -160.0f, -160.0f },
+				.maxVelocity = { 160.0f, 160.0f },
+				.velocityUpdateMultipler = 0.1f,
 				.minAngularVelocity = 0.0f,
-				.maxAngularVelocity = 0.0f,
-				.angularAcceleration = 0.0f,
+				.maxAngularVelocity = 180.0f,
+				.angularVelocityUpdateMultipler = -0.05f,
 				.minSize = { 10.0f, 10.0f },
 				.maxSize = { 25.0f, 25.0f },
 				.sizeUpdateMultipler = -0.25f,
 				.keepAsSquare = true,
-				.startColour = sd::colours::Red,
-				.endColour = sd::colours::Blue,
-				.texture = nullptr,
+				.startColour = sd::colours::Maroon,
+				.endColour = sd::colours::Orange,
+				.texture = &m_textures["particle"],
 				.minLifetime = 1.0f,
 				.maxLifetime = 3.0f,
 			});

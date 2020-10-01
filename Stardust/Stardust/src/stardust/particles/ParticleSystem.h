@@ -3,6 +3,7 @@
 #define PARTICLE_SYSTEM_H
 
 #include <cstddef>
+#include <unordered_map>
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -23,11 +24,11 @@ namespace stardust
 			
 			glm::vec2 minVelocity;
 			glm::vec2 maxVelocity;
-			float acceleration;
+			float velocityUpdateMultipler;
 
 			float minAngularVelocity;
 			float maxAngularVelocity;
-			float angularAcceleration;
+			float angularVelocityUpdateMultipler;
 
 			glm::vec2 minSize;
 			glm::vec2 maxSize;
@@ -49,10 +50,10 @@ namespace stardust
 			float rotation = 0.0f;
 
 			glm::vec2 velocity{ 0.0f, 0.0f };
-			float acceleration = 1.0f;
+			float velocityUpdateMultipler = 1.0f;
 
 			float angularVelocity;
-			float angularAcceleration;
+			float angularVelocityUpdateMultipler;
 
 			glm::vec2 size{ 0.0f, 0.0f };
 			float sizeUpdateMultipler = 1.0f;
@@ -70,11 +71,14 @@ namespace stardust
 
 		static constexpr std::size_t s_ParticleCount = 1'000u;
 
-		// TODO: create unordered_set of active particles.
 		std::vector<Particle> m_particlePool;
 		std::size_t m_particlePoolIndex = s_ParticleCount - 1u;
 
+		std::unordered_map<std::size_t, Particle*> m_activeParticles;
+
 	public:
+		static constexpr std::size_t GetMaxParticleCount() noexcept { return s_ParticleCount; }
+
 		ParticleSystem();
 		~ParticleSystem() noexcept = default;
 
@@ -82,6 +86,9 @@ namespace stardust
 		void Render(const Renderer& renderer) const;
 
 		void Emit(const ParticleData& particleData);
+		void KillAllParticles();
+
+		inline std::size_t GetActiveParticleCount() const noexcept { return m_activeParticles.size(); }
 	};
 }
 

@@ -1,16 +1,18 @@
-[15:14:01] [info] STARDUST: Logger initialised.
-[15:14:01] [debug] STARDUST: Platform detected: "Windows".
-[15:14:01] [info] STARDUST: ECS initialised.
-[15:14:01] [info] STARDUST: Virtual filesystem initialised.
-[15:14:01] [info] STARDUST: Config loaded.
-[15:14:01] [info] STARDUST: Locale "en-gb" loaded.
-[15:14:01] [info] STARDUST: Sound system initialised.
-[15:14:01] [info] STARDUST: SDL initialised.
-[15:14:01] [info] STARDUST: Window created.
-[15:14:01] [info] STARDUST: Renderer created without VSync.
-[15:14:01] [info] STARDUST: Text subsystem initialised.
-[15:14:01] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
-[15:14:01] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
-[15:14:01] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
-[15:14:01] [trace] STARDUST: Initial scene "Test" loaded.
-[15:15:33] [trace] STARDUST: Scene "Test" finished.
+[16:00:46] [info] STARDUST: Logger initialised.
+[16:00:46] [debug] STARDUST: Platform detected: "Windows".
+[16:00:46] [info] STARDUST: ECS initialised.
+[16:00:46] [info] STARDUST: Virtual filesystem initialised.
+[16:00:46] [info] STARDUST: Config loaded.
+[16:00:46] [info] STARDUST: Locale "en-gb" loaded.
+[16:00:46] [info] STARDUST: Sound system initialised.
+[16:00:46] [info] STARDUST: SDL initialised.
+[16:00:46] [info] STARDUST: Window created.
+[16:00:46] [info] STARDUST: Renderer created without VSync.
+[16:00:46] [info] STARDUST: Text subsystem initialised.
+[16:00:46] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
+[16:00:46] [trace] CLIENT: Texture "assets/textures/particle.png" loaded successfully.
+[16:00:46] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
+[16:00:46] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
+[16:00:46] [trace] STARDUST: Initial scene "Test" loaded.
+[16:00:58] [trace] STARDUST: Screenshot captured at screenshots/screenshot_16015320577142865.png.
+[16:00:59] [trace] STARDUST: Scene "Test" finished.
