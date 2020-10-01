@@ -160,6 +160,7 @@
     <ClCompile Include="src\stardust\audio\volume\VolumeManager.cpp" />
     <ClCompile Include="src\stardust\graphics\display\Display.cpp" />
     <ClCompile Include="src\stardust\graphics\renderer\Renderer.cpp" />
+    <ClCompile Include="src\stardust\graphics\surface\PixelSurface.cpp" />
     <ClCompile Include="src\stardust\graphics\texture\Texture.cpp" />
     <ClCompile Include="src\stardust\input\Input.cpp" />
     <ClCompile Include="src\stardust\locale\Locale.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="src\stardust\graphics\Colour.h" />
     <ClInclude Include="src\stardust\graphics\display\Display.h" />
     <ClInclude Include="src\stardust\graphics\renderer\Renderer.h" />
+    <ClInclude Include="src\stardust\graphics\surface\PixelSurface.h" />
     <ClInclude Include="src\stardust\graphics\texture\Texture.h" />
     <ClInclude Include="src\stardust\input\Input.h" />
     <ClInclude Include="src\stardust\input\KeyCode.h" />

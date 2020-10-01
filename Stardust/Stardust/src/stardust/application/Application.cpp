@@ -12,6 +12,7 @@
 
 #include "../debug/logging/Log.h"
 #include "../debug/message_box/MessageBox.h"
+#include "../graphics/surface/PixelSurface.h"
 #include "../input/Input.h"
 #include "../input/KeyCode.h"
 #include "../scene/Scene.h"
@@ -85,9 +86,9 @@ namespace stardust
 
 	void Application::TakeScreenshot()
 	{
-		SDL_Surface* pixelData = m_renderer.ReadPixels();
+		const PixelSurface pixelData = m_renderer.ReadPixels();
 
-		if (pixelData == nullptr)
+		if (!pixelData.IsValid())
 		{
 			message_box::Show(m_locale["warnings"]["titles"]["screenshot"], m_locale["warnings"]["bodies"]["screenshot"], message_box::Type::Warning);
 			Log::EngineWarn("Failed to take screenshot.");
@@ -98,19 +99,20 @@ namespace stardust
 		const unsigned long long currentTime = static_cast<unsigned long long>(std::chrono::system_clock::now().time_since_epoch().count());
 		const std::string screenshotFilename = m_screenshotDirectory + "/screenshot_" + std::to_string(currentTime) + ".png";
 
-		if (stbi_write_png(screenshotFilename.c_str(), pixelData->w, pixelData->h, pixelData->pitch / pixelData->w, pixelData->pixels, pixelData->pitch) == 0)
+		if (stbi_write_png(
+			screenshotFilename.c_str(),
+			static_cast<int>(pixelData.GetSize().x),
+			static_cast<int>(pixelData.GetSize().y),
+			static_cast<int>(pixelData.GetPitch() / pixelData.GetSize().x),
+			pixelData.GetPixels(),
+			static_cast<int>(pixelData.GetPitch())
+		) == 0)
 		{
-			SDL_FreeSurface(pixelData);
-			pixelData = nullptr;
-
 			message_box::Show(m_locale["warnings"]["titles"]["screenshot"], m_locale["warnings"]["bodies"]["screenshot"], message_box::Type::Warning);
 			Log::EngineWarn("Failed to take screenshot.");
 		}
 		else
 		{
-			SDL_FreeSurface(pixelData);
-			pixelData = nullptr;
-
 			Log::EngineTrace("Screenshot captured at {}.", screenshotFilename);
 		}
 	}

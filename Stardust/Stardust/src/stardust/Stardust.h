@@ -20,6 +20,7 @@
 #include "graphics/Colour.h"
 #include "graphics/display/Display.h"
 #include "graphics/renderer/Renderer.h"
+#include "graphics/surface/PixelSurface.h"
 #include "graphics/texture/Texture.h"
 #include "graphics/window/Window.h"
 

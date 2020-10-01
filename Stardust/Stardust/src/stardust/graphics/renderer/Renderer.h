@@ -14,6 +14,7 @@
 
 #include "../../rect/Rect.h"
 #include "../Colour.h"
+#include "../surface/PixelSurface.h"
 
 namespace stardust
 {
@@ -112,7 +113,7 @@ namespace stardust
 			const FlipAxis flipAxis = FlipAxis::None
 		) const;
 
-		SDL_Surface* ReadPixels(const std::optional<rect::Rect>& areaToRead = std::nullopt) const;
+		[[nodiscard]] PixelSurface ReadPixels(const std::optional<rect::Rect>& areaToRead = std::nullopt) const;
 
 		inline class Texture* GetCurrentRenderTarget() const noexcept { return m_currentRenderTarget; }
 		void SetCurrentRenderTarget(class Texture& targetTexture) const;

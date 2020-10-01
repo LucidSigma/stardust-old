@@ -8,8 +8,9 @@
 
 #include "../../debug/logging/Log.h"
 #include "../../debug/message_box/MessageBox.h"
-#include "../../graphics/display/Display.h"
 #include "../../vfs/VFS.h"
+#include "../display/Display.h"
+#include "../surface/PixelSurface.h"
 
 namespace stardust
 {
@@ -217,14 +218,9 @@ namespace stardust
 			return;
 		}
 
-		constexpr std::uint32_t RedMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'00'FF : 0xFF'00'00'00;
-		constexpr std::uint32_t GreenMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'FF'00 : 0x00'FF'00'00;
-		constexpr std::uint32_t BlueMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'FF'00'00 : 0x00'00'FF'00;
-		constexpr std::uint32_t AlphaMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0xFF'00'00'00 : 0x00'00'00'FF;
+		const PixelSurface iconSurface(iconWidth, iconHeight, iconData);
 
-		SDL_Surface* iconSurface = SDL_CreateRGBSurfaceFrom(iconData, iconWidth, iconHeight, sizeof(std::uint32_t) * 8u, iconWidth * 4u, RedMask, GreenMask, BlueMask, AlphaMask);
-
-		if (iconSurface == nullptr)
+		if (!iconSurface.IsValid())
 		{
 			message_box::Show(locale["warnings"]["titles"]["window"], locale["warnings"]["bodies"]["window-icon-convert"], message_box::Type::Warning);
 			Log::EngineWarn("Could not convert window icon image: {}.", SDL_GetError());
@@ -235,10 +231,7 @@ namespace stardust
 			return;
 		}
 
-		SDL_SetWindowIcon(GetRawHandle(), iconSurface);
-
-		SDL_FreeSurface(iconSurface);
-		iconSurface = nullptr;
+		SDL_SetWindowIcon(GetRawHandle(), iconSurface.GetRawHandle());
 
 		stbi_image_free(iconData);
 		iconData = nullptr;

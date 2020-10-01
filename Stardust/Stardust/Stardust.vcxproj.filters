@@ -96,6 +96,9 @@
     <ClCompile Include="src\stardust\text\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\stardust\graphics\surface\PixelSurface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stardust\utility\interfaces\INoncopyable.h">
@@ -219,6 +222,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\stardust\text\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stardust\graphics\surface\PixelSurface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

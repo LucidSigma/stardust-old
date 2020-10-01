@@ -248,7 +248,7 @@ namespace stardust
 		SDL_RenderCopyEx(GetRawHandle(), texture.GetRawHandle(), sourceRectPointer, &destinationRect, angle, centrePointer, static_cast<SDL_RendererFlip>(flipAxis));
 	}
 
-	SDL_Surface* Renderer::ReadPixels(const std::optional<rect::Rect>& areaToRead) const
+	[[nodiscard]] PixelSurface Renderer::ReadPixels(const std::optional<rect::Rect>& areaToRead) const
 	{
 		unsigned int width = 0u;
 		unsigned int height = 0u;
@@ -270,31 +270,24 @@ namespace stardust
 			height = m_window->GetSize().y;
 		}
 
-		constexpr std::uint32_t RedMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'00'FF : 0xFF'00'00'00;
-		constexpr std::uint32_t GreenMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'FF'00 : 0x00'FF'00'00;
-		constexpr std::uint32_t BlueMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'FF'00'00 : 0x00'00'FF'00;
-		constexpr std::uint32_t AlphaMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0xFF'00'00'00 : 0x00'00'00'FF;
+		PixelSurface pixelData(width, height);
 
-		SDL_Surface* pixelData = SDL_CreateRGBSurface(0u, static_cast<int>(width), static_cast<int>(height), static_cast<int>(sizeof(std::uint32_t) * 8u), RedMask, GreenMask, BlueMask, AlphaMask);
-
-		if (pixelData == nullptr)
+		if (!pixelData.IsValid())
 		{
-			return nullptr;
+			return PixelSurface();
 		}
 
 		const rect::Rect* readAreaPointer = areaToRead.has_value() ? &areaToRead.value() : nullptr;
-		SDL_LockSurface(pixelData);
+		pixelData.Lock();
 
-		if (SDL_RenderReadPixels(GetRawHandle(), readAreaPointer, pixelData->format->format, pixelData->pixels, pixelData->pitch) != 0)
+		if (SDL_RenderReadPixels(GetRawHandle(), readAreaPointer, pixelData.GetFormat(), pixelData.GetPixels(), static_cast<int>(pixelData.GetPitch())) != 0)
 		{
-			SDL_UnlockSurface(pixelData);
-			SDL_FreeSurface(pixelData);
-			pixelData = nullptr;
-
-			return nullptr;
+			pixelData.Unlock();
+			
+			return PixelSurface();
 		}
-		
-		SDL_UnlockSurface(pixelData);
+
+		pixelData.Unlock();
 
 		return pixelData;
 	}
