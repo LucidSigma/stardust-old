@@ -8,5 +8,6 @@
 #include <ratio>
 
 #include <glm/glm.hpp>
+#include <glm/gtx/compatibility.hpp>
 
 #endif

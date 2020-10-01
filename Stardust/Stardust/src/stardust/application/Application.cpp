@@ -49,7 +49,7 @@ namespace stardust
 
 		SDL_Event event{ };
 		float timeAccumulator = 0.0f;
-		
+
 		while (m_isRunning)
 		{
 			CalculateDeltaTime();

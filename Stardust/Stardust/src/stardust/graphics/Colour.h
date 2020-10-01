@@ -2,6 +2,7 @@
 #ifndef COLOUR_H
 #define COLOUR_H
 
+#include <glm/glm.hpp>
 #include <SDL2/SDL.h>
 
 namespace stardust
@@ -33,6 +34,9 @@ namespace stardust
 		constexpr Colour Pink{ 255u, 192u, 203u, 255u };
 		constexpr Colour Tan{ 210u, 180u, 140u, 255u };
 	}
+
+	[[nodiscard]] extern glm::vec4 ColourToVec4(const Colour& colour);
+	[[nodiscard]] extern Colour Vec4ToColour(const glm::vec4& vector);
 }
 
 #endif

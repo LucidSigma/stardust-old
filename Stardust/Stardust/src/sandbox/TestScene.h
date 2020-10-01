@@ -52,6 +52,8 @@ private:
 	sd::AssetManager<sd::Font> m_fonts;
 
 	sd::Entity m_drawable;
+	sd::ParticleSystem m_particles;
+	float m_particleCounter = 0.0f;
 
 public:
 	TestScene(sd::Application& application, const std::string& name)
@@ -215,7 +217,33 @@ public:
 
 	virtual void Update(const float deltaTime) override
 	{
-		
+		m_particleCounter += deltaTime;
+
+		if (m_particleCounter >= 0.1f)
+		{
+			m_particleCounter = 0.0f;
+			m_particles.Emit(stardust::ParticleSystem::ParticleData{
+				.initialPosition = m_application.GetRenderer().GetLogicalSize() / 2u,
+				.initialRotation = 0.0f,
+				.minVelocity = { -80.0f, -80.0f },
+				.maxVelocity = { 80.0f, 80.0f },
+				.acceleration = 0.1f,
+				.minAngularVelocity = 0.0f,
+				.maxAngularVelocity = 0.0f,
+				.angularAcceleration = 0.0f,
+				.minSize = { 10.0f, 10.0f },
+				.maxSize = { 25.0f, 25.0f },
+				.sizeUpdateMultipler = -0.25f,
+				.keepAsSquare = true,
+				.startColour = sd::colours::Red,
+				.endColour = sd::colours::Blue,
+				.texture = nullptr,
+				.minLifetime = 1.0f,
+				.maxLifetime = 3.0f,
+			});
+		}
+
+		m_particles.Update(deltaTime);
 	}
 
 	virtual void Render(const sd::Renderer& renderer) const override
@@ -240,6 +268,7 @@ public:
 		});
 
 		renderer.DrawTexture(m_textures["text"], std::nullopt, glm::vec2{ 10.0f, 10.0f }, glm::vec2{ 1.0f, 1.0f });
+		m_particles.Render(renderer);
 	}
 };
 

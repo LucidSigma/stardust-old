@@ -158,12 +158,14 @@
     <ClCompile Include="src\stardust\audio\SoundSource.cpp" />
     <ClCompile Include="src\stardust\audio\SoundSystem.cpp" />
     <ClCompile Include="src\stardust\audio\volume\VolumeManager.cpp" />
+    <ClCompile Include="src\stardust\graphics\Colour.cpp" />
     <ClCompile Include="src\stardust\graphics\display\Display.cpp" />
     <ClCompile Include="src\stardust\graphics\renderer\Renderer.cpp" />
     <ClCompile Include="src\stardust\graphics\surface\PixelSurface.cpp" />
     <ClCompile Include="src\stardust\graphics\texture\Texture.cpp" />
     <ClCompile Include="src\stardust\input\Input.cpp" />
     <ClCompile Include="src\stardust\locale\Locale.cpp" />
+    <ClCompile Include="src\stardust\particles\ParticleSystem.cpp" />
     <ClCompile Include="src\stardust\rect\Rect.cpp" />
     <ClCompile Include="src\stardust\scene\entity\Entity.cpp" />
     <ClCompile Include="src\stardust\scene\Scene.cpp" />
@@ -202,6 +204,7 @@
     <ClInclude Include="src\stardust\input\KeyCode.h" />
     <ClInclude Include="src\stardust\locale\Locale.h" />
     <ClInclude Include="src\stardust\math\Math.h" />
+    <ClInclude Include="src\stardust\particles\ParticleSystem.h" />
     <ClInclude Include="src\stardust\rect\Rect.h" />
     <ClInclude Include="src\stardust\scene\components\Components.h" />
     <ClInclude Include="src\stardust\scene\components\SpriteRendererComponent.h" />

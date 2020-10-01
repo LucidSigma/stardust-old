@@ -31,6 +31,8 @@
 #include "math/Math.h"
 #include "rect/Rect.h"
 
+#include "particles/ParticleSystem.h"
+
 #include "scene/Scene.h"
 #include "scene/SceneManager.h"
 #include "scene/components/Components.h"
