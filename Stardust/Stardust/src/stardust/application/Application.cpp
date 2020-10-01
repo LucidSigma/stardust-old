@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include <chrono>
+#include <functional>
 #include <utility>
 #include <vector>
 
