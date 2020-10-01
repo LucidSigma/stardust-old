@@ -37,6 +37,11 @@ namespace stardust
 			particle->velocity *= 1.0f + (particle->velocityUpdateMultipler * deltaTime);
 			particle->angularVelocity *= 1.0f + (particle->angularVelocityUpdateMultipler * deltaTime);
 
+			if (particle->isAffectedByGravity)
+			{
+				particle->velocity.y -= m_gravity * deltaTime;
+			}
+
 			particle->position += particle->velocity * deltaTime;
 			particle->rotation += particle->angularVelocity * deltaTime;
 			particle->size *= 1.0f + (particle->sizeUpdateMultipler * deltaTime);
@@ -66,8 +71,8 @@ namespace stardust
 			}
 
 			const rect::Rect sourceRect = rect::Create(
-				static_cast<int>(particle->position.x),
-				static_cast<int>(particle->position.y),
+				static_cast<int>(particle->position.x - particle->size.x / 2.0f),
+				static_cast<int>(particle->position.y - particle->size.y / 2.0f),
 				static_cast<unsigned int>(particle->size.x),
 				static_cast<unsigned int>(particle->size.y)
 			);
@@ -84,7 +89,7 @@ namespace stardust
 				particle->texture->SetColourMod(particle->currentColour.r, particle->currentColour.g, particle->currentColour.b);
 				particle->texture->SetAlphaMod(particle->currentColour.a);
 
-				renderer.DrawRotatedTexture(*particle->texture, std::nullopt, particle->position, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation, std::nullopt);
+				renderer.DrawRotatedTexture(*particle->texture, std::nullopt, particle->position - particle->size / 2.0f, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation, std::nullopt);
 
 				particle->texture->SetColourMod(originalRed, originalGreen, originalBlue);
 				particle->texture->SetAlphaMod(originalAlpha);
@@ -105,6 +110,8 @@ namespace stardust
 
 		particle.angularVelocity = Random::GenerateFloat(particleData.minAngularVelocity, particleData.maxAngularVelocity);
 		particle.angularVelocityUpdateMultipler = particleData.angularVelocityUpdateMultipler;
+
+		particle.isAffectedByGravity = particleData.isAffectedByGravity;
 
 		particle.size.x = Random::GenerateFloat(particleData.minSize.x, particleData.maxSize.x);
 		particle.size.y = particleData.keepAsSquare ? particle.size.x : Random::GenerateFloat(particleData.minSize.y, particleData.maxSize.y);

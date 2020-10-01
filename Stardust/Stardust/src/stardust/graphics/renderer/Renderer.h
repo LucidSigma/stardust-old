@@ -136,6 +136,7 @@ namespace stardust
 
 		[[nodiscard]] glm::uvec2 GetLogicalSize() const noexcept;
 		void SetLogicalSize(const glm::uvec2& logicalSize) const noexcept;
+		[[nodiscard]] glm::vec2 GetLogicalSizeScale() const noexcept;
 
 		[[nodiscard]] glm::vec2 GetScale() const noexcept;
 		void SetScale(const glm::vec2& scale) const noexcept;

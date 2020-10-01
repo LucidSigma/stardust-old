@@ -54,6 +54,7 @@ private:
 	sd::Entity m_drawable;
 	sd::ParticleSystem m_particles;
 	float m_particleCounter = 0.0f;
+	float m_clickParticleDelay = 0.01f;
 
 public:
 	TestScene(sd::Application& application, const std::string& name)
@@ -117,6 +118,8 @@ public:
 		m_drawable.AddComponent<Velocity>(0.0f, 0.0f);
 		m_drawable.AddComponent<Rotater>(250.0f);
 		m_drawable.AddComponent<sd_comp::SpriteRendererComponent>(m_textures["gear"]);
+
+		m_particles.SetGravity(-100.0f);
 
 		return sd::Status::Success;
 	}
@@ -191,6 +194,32 @@ public:
 			soundSource.FadePan(1.0f, 1.0f);
 		}
 
+		if (sd::Input::GetMouseState().IsButtonPressed(sd::Input::Mouse::Button::Left) && m_clickParticleDelay < 0.0f)
+		{
+			m_clickParticleDelay = 0.01f;
+
+			m_particles.Emit(sd::ParticleSystem::ParticleData{
+				.initialPosition = sd::Input::GetMouseState().GetProportionalCoordinates(m_application.GetRenderer()),
+				.initialRotation = 0.0f,
+				.minVelocity = { -200.0f, -200.0f },
+				.maxVelocity = { 200.0f, 200.0f },
+				.velocityUpdateMultipler = 0.1f,
+				.minAngularVelocity = 0.0f,
+				.maxAngularVelocity = 180.0f,
+				.angularVelocityUpdateMultipler = -0.05f,
+				.isAffectedByGravity = false,
+				.minSize = { 10.0f, 10.0f },
+				.maxSize = { 40.0f, 40.0f },
+				.sizeUpdateMultipler = -0.25f,
+				.keepAsSquare = true,
+				.startColour = sd::colours::Green,
+				.endColour = sd::colours::Yellow,
+				.texture = nullptr,
+				.minLifetime = 0.5f,
+				.maxLifetime = 1.0f,
+			});
+		}
+
 		m_entityRegistry.view<KeyboardControlled, Velocity>().each([](const auto& keyboardController, auto& velocity)
 		{
 			velocity.x = 0.0f;
@@ -223,36 +252,43 @@ public:
 	virtual void Update(const float deltaTime) override
 	{
 		m_particleCounter += deltaTime;
+		m_clickParticleDelay -= deltaTime;
 
-		if (m_particleCounter >= 0.05f)
+		m_entityRegistry.view<sd_comp::TransformComponent, sd_comp::SpriteRendererComponent>().each([this, deltaTime](const auto& transform, const auto& spriteRenderer)
 		{
-			m_particleCounter = 0.0f;
-			m_particles.Emit(sd::ParticleSystem::ParticleData{
-				.initialPosition = m_application.GetRenderer().GetLogicalSize() / 2u,
-				.initialRotation = 0.0f,
-				.minVelocity = { -160.0f, -160.0f },
-				.maxVelocity = { 160.0f, 160.0f },
-				.velocityUpdateMultipler = 0.1f,
-				.minAngularVelocity = 0.0f,
-				.maxAngularVelocity = 180.0f,
-				.angularVelocityUpdateMultipler = -0.05f,
-				.minSize = { 10.0f, 10.0f },
-				.maxSize = { 25.0f, 25.0f },
-				.sizeUpdateMultipler = -0.25f,
-				.keepAsSquare = true,
-				.startColour = sd::colours::Maroon,
-				.endColour = sd::colours::Orange,
-				.texture = &m_textures["particle"],
-				.minLifetime = 1.0f,
-				.maxLifetime = 3.0f,
-			});
-		}
-
+			if (m_particleCounter >= 0.1f)
+			{
+				m_particleCounter = 0.0f;
+				m_particles.Emit(sd::ParticleSystem::ParticleData{
+					.initialPosition = transform.position + static_cast<glm::vec2>(spriteRenderer.texture->GetSize() / 2u),
+					.initialRotation = 0.0f,
+					.minVelocity = { -160.0f, -160.0f },
+					.maxVelocity = { 160.0f, 160.0f },
+					.velocityUpdateMultipler = 0.1f,
+					.minAngularVelocity = 0.0f,
+					.maxAngularVelocity = 180.0f,
+					.angularVelocityUpdateMultipler = -0.05f,
+					.isAffectedByGravity = true,
+					.minSize = { 10.0f, 10.0f },
+					.maxSize = { 25.0f, 25.0f },
+					.sizeUpdateMultipler = -0.25f,
+					.keepAsSquare = true,
+					.startColour = sd::colours::Grey,
+					.endColour = sd::colours::White,
+					.texture = &m_textures["particle"],
+					.minLifetime = 0.5f,
+					.maxLifetime = 3.25f,
+				});
+			}
+		});
+		
 		m_particles.Update(deltaTime);
 	}
 
 	virtual void Render(const sd::Renderer& renderer) const override
 	{
+		m_particles.Render(renderer);
+
 		m_entityRegistry.sort<sd_comp::SpriteRendererComponent>([](const auto& lhs, const auto& rhs)
 		{
 			return lhs.z < rhs.z;
@@ -273,7 +309,6 @@ public:
 		});
 
 		renderer.DrawTexture(m_textures["text"], std::nullopt, glm::vec2{ 10.0f, 10.0f }, glm::vec2{ 1.0f, 1.0f });
-		m_particles.Render(renderer);
 	}
 };
 

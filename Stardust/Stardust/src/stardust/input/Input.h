@@ -15,6 +15,7 @@
 #include <magic_enum/magic_enum.hpp>
 #include <SDL2/SDL.h>
 
+#include "../graphics/renderer/Renderer.h"
 #include "KeyCode.h"
 
 namespace stardust
@@ -79,11 +80,11 @@ namespace stardust
 			Mouse() = default;
 			~Mouse() noexcept = default;
 
-			inline float GetX() const noexcept { return m_x; }
-			inline float GetY() const noexcept { return m_y; }
+			[[nodiscard]] inline glm::vec2 GetCoordinates() const noexcept { return glm::vec2{ m_x, m_y }; }
+			[[nodiscard]] inline glm::vec2 GetProportionalCoordinates(const Renderer& renderer) const noexcept { return glm::vec2{ m_x, m_y } * renderer.GetLogicalSizeScale(); }
 
-			inline float GetRelativeX() const noexcept { return m_relativeX; }
-			inline float GetRelativeY() const noexcept { return m_relativeY; }
+			[[nodiscard]] inline glm::vec2 GetRelativeCoordinates() const noexcept { return glm::vec2{ m_relativeX, m_relativeY }; }
+			[[nodiscard]] inline glm::vec2 GetProportionalRelativeCoordinates(const Renderer& renderer) const noexcept { return glm::vec2{ m_relativeX, m_relativeY } * renderer.GetLogicalSizeScale(); }
 
 			[[nodiscard]] bool IsButtonDown(const Button button) const;
 			[[nodiscard]] bool IsButtonPressed(const Button button) const;

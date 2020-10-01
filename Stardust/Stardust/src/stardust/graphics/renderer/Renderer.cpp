@@ -352,6 +352,11 @@ namespace stardust
 		SDL_RenderSetLogicalSize(GetRawHandle(), static_cast<int>(logicalSize.x), static_cast<int>(logicalSize.y));
 	}
 
+	glm::vec2 Renderer::GetLogicalSizeScale() const noexcept
+	{
+		return static_cast<glm::vec2>(GetLogicalSize()) / static_cast<glm::vec2>(m_window->GetSize());
+	}
+
 	[[nodiscard]] glm::vec2 Renderer::GetScale() const noexcept
 	{
 		float xScale = 0.0f;

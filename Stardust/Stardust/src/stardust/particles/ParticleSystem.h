@@ -30,6 +30,8 @@ namespace stardust
 			float maxAngularVelocity;
 			float angularVelocityUpdateMultipler;
 
+			bool isAffectedByGravity;
+
 			glm::vec2 minSize;
 			glm::vec2 maxSize;
 			float sizeUpdateMultipler;
@@ -55,6 +57,8 @@ namespace stardust
 			float angularVelocity;
 			float angularVelocityUpdateMultipler;
 
+			bool isAffectedByGravity = false;
+
 			glm::vec2 size{ 0.0f, 0.0f };
 			float sizeUpdateMultipler = 1.0f;
 			
@@ -76,6 +80,8 @@ namespace stardust
 
 		std::unordered_map<std::size_t, Particle*> m_activeParticles;
 
+		float m_gravity = 0.0f;
+
 	public:
 		static constexpr std::size_t GetMaxParticleCount() noexcept { return s_ParticleCount; }
 
@@ -89,6 +95,9 @@ namespace stardust
 		void KillAllParticles();
 
 		inline std::size_t GetActiveParticleCount() const noexcept { return m_activeParticles.size(); }
+
+		inline float GetGravity() const noexcept { return m_gravity; }
+		inline void SetGravity(const float gravity) noexcept { m_gravity = gravity; }
 	};
 }
 
