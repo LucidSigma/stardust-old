@@ -270,7 +270,7 @@ namespace stardust
 			height = m_window->GetSize().y;
 		}
 
-		PixelSurface pixelData(width, height);
+		PixelSurface pixelData(width, height, 4u);
 
 		if (!pixelData.IsValid())
 		{

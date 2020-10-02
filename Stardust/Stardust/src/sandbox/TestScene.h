@@ -202,6 +202,9 @@ public:
 		{
 			m_clickParticleDelay = 0.01f;
 
+			auto finalColour = sd::colours::Magenta;
+			finalColour.a = 0u;
+
 			m_particles.Emit(sd::ParticleSystem::ParticleData{
 				.initialPosition = sd::Input::GetMouseState().GetProportionalCoordinates(m_application.GetRenderer()),
 				.initialRotation = 0.0f,
@@ -217,7 +220,7 @@ public:
 				.sizeUpdateMultipler = -0.4f,
 				.keepAsSquare = false,
 				.startColour = sd::colours::Purple,
-				.endColour = sd::colours::Magenta,
+				.endColour = finalColour,
 				.texture = nullptr,
 				.textureArea = std::nullopt,
 				.minLifetime = 0.5f,

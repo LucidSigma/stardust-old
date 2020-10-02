@@ -74,7 +74,7 @@ namespace stardust
 		int width = 0;
 		int height = 0;
 		int channelCount = 0;
-		stbi_uc* textureData = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(rawTextureData.data()), static_cast<int>(rawTextureData.size()), &width, &height, &channelCount, STBI_rgb_alpha);
+		stbi_uc* textureData = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(rawTextureData.data()), static_cast<int>(rawTextureData.size()), &width, &height, &channelCount, STBI_default);
 
 		if (textureData == nullptr)
 		{
@@ -86,7 +86,7 @@ namespace stardust
 		constexpr std::uint32_t BlueMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'FF'00'00 : 0x00'00'FF'00;
 		constexpr std::uint32_t AlphaMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0xFF'00'00'00 : 0x00'00'00'FF;
 
-		SDL_Surface* textureSurface = SDL_CreateRGBSurfaceFrom(textureData, width, height, sizeof(std::uint32_t) * 8u, width * channelCount, RedMask, GreenMask, BlueMask, AlphaMask);
+		SDL_Surface* textureSurface = SDL_CreateRGBSurfaceFrom(textureData, width, height, channelCount * 8, width * channelCount, RedMask, GreenMask, BlueMask, AlphaMask);
 
 		if (textureData == nullptr)
 		{

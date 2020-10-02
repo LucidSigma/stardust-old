@@ -29,16 +29,16 @@ namespace stardust
 
 	public:
 		PixelSurface() = default;
-		PixelSurface(const unsigned int width, const unsigned int height);
-		PixelSurface(const unsigned int width, const unsigned int height, void* const pixels);
+		PixelSurface(const unsigned int width, const unsigned int height, const unsigned int channelCount);
+		PixelSurface(const unsigned int width, const unsigned int height, const unsigned int channelCount, void* const pixels);
 
 		PixelSurface(PixelSurface&& other) noexcept;
 		PixelSurface& operator =(PixelSurface&& other) noexcept;
 
 		~PixelSurface() noexcept;
 
-		void Initialise(const unsigned int width, const unsigned int height);
-		void Initialise(const unsigned int width, const unsigned int height, void* const pixels);
+		void Initialise(const unsigned int width, const unsigned int height, const unsigned int channelCount);
+		void Initialise(const unsigned int width, const unsigned int height, const unsigned int channelCount, void* const pixels);
 		void Destroy() noexcept;
 
 		inline bool IsValid() const noexcept { return m_handle != nullptr; }

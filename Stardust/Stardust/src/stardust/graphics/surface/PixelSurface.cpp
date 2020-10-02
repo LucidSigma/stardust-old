@@ -9,14 +9,14 @@ namespace stardust
 		SDL_FreeSurface(surface);
 	}
 
-	PixelSurface::PixelSurface(const unsigned int width, const unsigned int height)
+	PixelSurface::PixelSurface(const unsigned int width, const unsigned int height, const unsigned int channelCount)
 	{
-		Initialise(width, height);
+		Initialise(width, height, channelCount);
 	}
 
-	PixelSurface::PixelSurface(const unsigned int width, const unsigned int height, void* const pixels)
+	PixelSurface::PixelSurface(const unsigned int width, const unsigned int height, const unsigned int channelCount, void* const pixels)
 	{
-		Initialise(width, height, pixels);
+		Initialise(width, height, channelCount, pixels);
 	}
 
 	PixelSurface::PixelSurface(PixelSurface&& other) noexcept
@@ -39,7 +39,7 @@ namespace stardust
 		Destroy();
 	}
 
-	void PixelSurface::Initialise(const unsigned int width, const unsigned int height)
+	void PixelSurface::Initialise(const unsigned int width, const unsigned int height, const unsigned int channelCount)
 	{
 		constexpr std::uint32_t RedMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'00'FF : 0xFF'00'00'00;
 		constexpr std::uint32_t GreenMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'FF'00 : 0x00'FF'00'00;
@@ -60,7 +60,7 @@ namespace stardust
 		);
 	}
 
-	void PixelSurface::Initialise(const unsigned int width, const unsigned int height, void* const pixels)
+	void PixelSurface::Initialise(const unsigned int width, const unsigned int height, const unsigned int channelCount, void* const pixels)
 	{
 		constexpr std::uint32_t RedMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'00'FF : 0xFF'00'00'00;
 		constexpr std::uint32_t GreenMask = SDL_BYTEORDER == SDL_LIL_ENDIAN ? 0x00'00'FF'00 : 0x00'FF'00'00;

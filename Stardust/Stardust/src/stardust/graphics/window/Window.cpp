@@ -218,7 +218,7 @@ namespace stardust
 			return;
 		}
 
-		const PixelSurface iconSurface(iconWidth, iconHeight, iconData);
+		const PixelSurface iconSurface(iconWidth, iconHeight, 4u, iconData);
 
 		if (!iconSurface.IsValid())
 		{
