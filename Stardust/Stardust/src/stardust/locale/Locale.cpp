@@ -65,7 +65,7 @@ namespace stardust
 			false
 		);
 
-		if (m_currentLocale.is_discarded())
+		if (locale.is_discarded())
 		{
 			return std::nullopt;
 		}

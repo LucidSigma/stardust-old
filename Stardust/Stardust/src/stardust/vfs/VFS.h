@@ -28,6 +28,8 @@ namespace stardust
 		[[nodiscard]] extern std::vector<std::string> GetAllFileNamesInDirectory(const std::string_view& directory);
 		[[nodiscard]] extern bool DoesFileExist(const std::string_view& filepath);
 		
+		[[nodiscard]] extern bool IsDirectory(const std::string_view& filepath);
+		[[nodiscard]] extern std::string GetParentFilepath(const std::string_view& filepath);
 		[[nodiscard]] extern std::string GetFilenameFromDirectory(const std::string_view& filepath);
 		[[nodiscard]] extern std::string GetFileStem(const std::string_view& filename);
 		[[nodiscard]] extern std::string GetFileExtension(const std::string_view& filename);

@@ -22,6 +22,7 @@
 #include "graphics/renderer/Renderer.h"
 #include "graphics/surface/PixelSurface.h"
 #include "graphics/texture/Texture.h"
+#include "graphics/texture/texture_atlas/TextureAtlas.h"
 #include "graphics/window/Window.h"
 
 #include "input/Input.h"

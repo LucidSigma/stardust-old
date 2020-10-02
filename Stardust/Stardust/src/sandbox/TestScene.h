@@ -56,6 +56,8 @@ private:
 	float m_particleCounter = 0.0f;
 	float m_clickParticleDelay = 0.01f;
 
+	sd::TextureAtlas m_textureAtlas;
+
 public:
 	TestScene(sd::Application& application, const std::string& name)
 		: sd::Scene(application, name)
@@ -120,6 +122,8 @@ public:
 		m_drawable.AddComponent<sd_comp::SpriteRendererComponent>(m_textures["gear"]);
 
 		m_particles.SetGravity(-250.0f);
+
+		m_textureAtlas.Initialise(m_application.GetRenderer(), "assets/textures/texture_atlases/conveyors.taj");
 
 		return sd::Status::Success;
 	}
@@ -309,6 +313,10 @@ public:
 				std::nullopt
 			);
 		});
+
+		renderer.DrawTexture(m_textureAtlas.GetTexture(), m_textureAtlas["left"], glm::vec2{ 100.0f, 100.0f }, glm::vec2{ 4.0f, 4.0f });
+		renderer.DrawTexture(m_textureAtlas.GetTexture(), m_textureAtlas["right"], glm::vec2{ 200.0f, 100.0f }, glm::vec2{ 4.0f, 4.0f });
+		//renderer.DrawTexture(m_textureAtlas.GetTexture(), std::nullopt, glm::vec2{ 200.0f, 100.0f }, glm::vec2{ 4.0f, 4.0f });
 
 		renderer.DrawTexture(m_textures["text"], std::nullopt, glm::vec2{ 10.0f, 10.0f }, glm::vec2{ 1.0f, 1.0f });
 	}

@@ -48,7 +48,12 @@ namespace stardust
 
 			for (const char* const* filename = enumeratedFiles; *filename != nullptr; ++filename)
 			{
-				files.push_back(std::string(directory) + "/" + *filename);
+				const std::string fullFilepath = std::string(directory) + "/" + *filename;
+
+				if (!IsDirectory(fullFilepath))
+				{
+					files.push_back(fullFilepath);
+				}
 			}
 
 			PHYSFS_freeList(enumeratedFiles);
@@ -64,7 +69,10 @@ namespace stardust
 			
 			for (const char* const* filename = enumeratedFiles; *filename != nullptr; ++filename)
 			{
-				files.push_back(std::string(*filename));
+				if (!IsDirectory(std::string(directory) + "/" + *filename))
+				{
+					files.push_back(std::string(*filename));
+				}
 			}
 
 			PHYSFS_freeList(enumeratedFiles);
@@ -76,6 +84,16 @@ namespace stardust
 		[[nodiscard]] bool DoesFileExist(const std::string_view& filepath)
 		{
 			return PHYSFS_exists(filepath.data()) != 0;
+		}
+
+		bool IsDirectory(const std::string_view& filepath)
+		{
+			return PHYSFS_isDirectory(filepath.data()) != 0;
+		}
+
+		[[nodiscard]] std::string GetParentFilepath(const std::string_view& filepath)
+		{
+			return std::filesystem::path(filepath).parent_path().string();
 		}
 
 		[[nodiscard]] std::string GetFilenameFromDirectory(const std::string_view& filepath)

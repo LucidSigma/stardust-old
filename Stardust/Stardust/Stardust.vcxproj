@@ -163,6 +163,7 @@
     <ClCompile Include="src\stardust\graphics\renderer\Renderer.cpp" />
     <ClCompile Include="src\stardust\graphics\surface\PixelSurface.cpp" />
     <ClCompile Include="src\stardust\graphics\texture\Texture.cpp" />
+    <ClCompile Include="src\stardust\graphics\texture\texture_atlas\TextureAtlas.cpp" />
     <ClCompile Include="src\stardust\input\Input.cpp" />
     <ClCompile Include="src\stardust\locale\Locale.cpp" />
     <ClCompile Include="src\stardust\particles\ParticleSystem.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="src\stardust\graphics\renderer\Renderer.h" />
     <ClInclude Include="src\stardust\graphics\surface\PixelSurface.h" />
     <ClInclude Include="src\stardust\graphics\texture\Texture.h" />
+    <ClInclude Include="src\stardust\graphics\texture\texture_atlas\TextureAtlas.h" />
     <ClInclude Include="src\stardust\input\Input.h" />
     <ClInclude Include="src\stardust\input\KeyCode.h" />
     <ClInclude Include="src\stardust\locale\Locale.h" />

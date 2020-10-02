@@ -219,8 +219,8 @@ namespace stardust
 		const rect::Rect destinationRect = rect::Create(
 			static_cast<int>(position.x),
 			static_cast<int>(position.y),
-			static_cast<unsigned int>(texture.GetSize().x * scale.x),
-			static_cast<unsigned int>(texture.GetSize().y * scale.y)
+			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->w : texture.GetSize().x) * scale.x),
+			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->h : texture.GetSize().y) * scale.y)
 		);
 
 		SDL_RenderCopy(GetRawHandle(), texture.GetRawHandle(), sourceRectPointer, &destinationRect);
@@ -241,8 +241,8 @@ namespace stardust
 		const rect::Rect destinationRect = rect::Create(
 			static_cast<int>(position.x),
 			static_cast<int>(position.y),
-			static_cast<unsigned int>(texture.GetSize().x * scale.x),
-			static_cast<unsigned int>(texture.GetSize().y * scale.y)
+			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->w : texture.GetSize().x) * scale.x),
+			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->h : texture.GetSize().y) * scale.y)
 		);
 
 		SDL_RenderCopyEx(GetRawHandle(), texture.GetRawHandle(), sourceRectPointer, &destinationRect, angle, centrePointer, static_cast<SDL_RendererFlip>(flipAxis));
