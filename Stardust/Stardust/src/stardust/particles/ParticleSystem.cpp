@@ -5,7 +5,6 @@
 
 #include <glm/gtx/compatibility.hpp>
 
-#include "../rect/Rect.h"
 #include "../utility/random/Random.h"
 
 namespace stardust
@@ -89,7 +88,7 @@ namespace stardust
 				particle->texture->SetColourMod(particle->currentColour.r, particle->currentColour.g, particle->currentColour.b);
 				particle->texture->SetAlphaMod(particle->currentColour.a);
 
-				renderer.DrawRotatedTexture(*particle->texture, std::nullopt, particle->position - particle->size / 2.0f, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation, std::nullopt);
+				renderer.DrawRotatedTexture(*particle->texture, particle->textureArea, particle->position - particle->size / 2.0f, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation, std::nullopt);
 
 				particle->texture->SetColourMod(originalRed, originalGreen, originalBlue);
 				particle->texture->SetAlphaMod(originalAlpha);
@@ -121,6 +120,7 @@ namespace stardust
 		particle.startColour = particleData.startColour;
 		particle.endColour = particleData.endColour;
 		particle.texture = particleData.texture;
+		particle.textureArea = particleData.textureArea;
 
 		particle.lifetime = Random::GenerateFloat(particleData.minLifetime, particleData.maxLifetime);
 		particle.lifetimeRemaining = particle.lifetime;

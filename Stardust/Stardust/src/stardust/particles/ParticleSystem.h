@@ -3,6 +3,7 @@
 #define PARTICLE_SYSTEM_H
 
 #include <cstddef>
+#include <optional>
 #include <unordered_map>
 #include <vector>
 
@@ -11,6 +12,7 @@
 #include "../graphics/Colour.h"
 #include "../graphics/renderer/Renderer.h"
 #include "../graphics/texture/Texture.h"
+#include "../rect/Rect.h"
 
 namespace stardust
 {
@@ -40,6 +42,7 @@ namespace stardust
 			Colour startColour;
 			Colour endColour;
 			const Texture* texture;
+			std::optional<rect::Rect> textureArea;
 
 			float minLifetime;
 			float maxLifetime;
@@ -66,6 +69,7 @@ namespace stardust
 			Colour startColour = colours::White;
 			Colour endColour = colours::White;
 			const Texture* texture = nullptr;
+			std::optional<rect::Rect> textureArea = std::nullopt;
 
 			float lifetime = 0.0f;
 			float lifetimeRemaining = 0.0f;

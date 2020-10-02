@@ -119,7 +119,7 @@ public:
 		m_drawable.AddComponent<Rotater>(250.0f);
 		m_drawable.AddComponent<sd_comp::SpriteRendererComponent>(m_textures["gear"]);
 
-		m_particles.SetGravity(-100.0f);
+		m_particles.SetGravity(-250.0f);
 
 		return sd::Status::Success;
 	}
@@ -201,20 +201,21 @@ public:
 			m_particles.Emit(sd::ParticleSystem::ParticleData{
 				.initialPosition = sd::Input::GetMouseState().GetProportionalCoordinates(m_application.GetRenderer()),
 				.initialRotation = 0.0f,
-				.minVelocity = { -200.0f, -200.0f },
-				.maxVelocity = { 200.0f, 200.0f },
-				.velocityUpdateMultipler = 0.1f,
+				.minVelocity = { -250.0f, -250.0f },
+				.maxVelocity = { 250.0f, 250.0f },
+				.velocityUpdateMultipler = 0.4f,
 				.minAngularVelocity = 0.0f,
 				.maxAngularVelocity = 180.0f,
-				.angularVelocityUpdateMultipler = -0.05f,
+				.angularVelocityUpdateMultipler = -0.1f,
 				.isAffectedByGravity = false,
-				.minSize = { 10.0f, 10.0f },
-				.maxSize = { 40.0f, 40.0f },
-				.sizeUpdateMultipler = -0.25f,
-				.keepAsSquare = true,
-				.startColour = sd::colours::Green,
-				.endColour = sd::colours::Yellow,
+				.minSize = { 20.0f, 30.0f },
+				.maxSize = { 60.0f, 60.0f },
+				.sizeUpdateMultipler = -0.4f,
+				.keepAsSquare = false,
+				.startColour = sd::colours::Purple,
+				.endColour = sd::colours::Magenta,
 				.texture = nullptr,
+				.textureArea = std::nullopt,
 				.minLifetime = 0.5f,
 				.maxLifetime = 1.0f,
 			});
@@ -264,7 +265,7 @@ public:
 					.initialRotation = 0.0f,
 					.minVelocity = { -160.0f, -160.0f },
 					.maxVelocity = { 160.0f, 160.0f },
-					.velocityUpdateMultipler = 0.1f,
+					.velocityUpdateMultipler = 0.4f,
 					.minAngularVelocity = 0.0f,
 					.maxAngularVelocity = 180.0f,
 					.angularVelocityUpdateMultipler = -0.05f,
@@ -276,6 +277,7 @@ public:
 					.startColour = sd::colours::Grey,
 					.endColour = sd::colours::White,
 					.texture = &m_textures["particle"],
+					.textureArea = std::nullopt,
 					.minLifetime = 0.5f,
 					.maxLifetime = 3.25f,
 				});
