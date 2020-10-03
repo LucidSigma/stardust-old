@@ -1,17 +1,17 @@
-[23:10:36] [info] STARDUST: Logger initialised.
-[23:10:36] [debug] STARDUST: Platform detected: "Windows".
-[23:10:36] [info] STARDUST: ECS initialised.
-[23:10:36] [info] STARDUST: Virtual filesystem initialised.
-[23:10:36] [info] STARDUST: Config loaded.
-[23:10:36] [info] STARDUST: Locale "en-gb" loaded.
-[23:10:36] [info] STARDUST: Sound system initialised.
-[23:10:37] [info] STARDUST: SDL initialised.
-[23:10:37] [info] STARDUST: Window created.
-[23:10:37] [info] STARDUST: Renderer created without VSync.
-[23:10:37] [info] STARDUST: Text subsystem initialised.
-[23:10:37] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
-[23:10:37] [trace] CLIENT: Texture "assets/textures/particle.png" loaded successfully.
-[23:10:37] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
-[23:10:37] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
-[23:10:37] [trace] STARDUST: Initial scene "Test" loaded.
-[23:10:43] [trace] STARDUST: Scene "Test" finished.
+[13:39:02] [info] STARDUST: Logger initialised.
+[13:39:02] [debug] STARDUST: Platform detected: "Windows".
+[13:39:02] [info] STARDUST: ECS initialised.
+[13:39:02] [info] STARDUST: Virtual filesystem initialised.
+[13:39:02] [info] STARDUST: Config loaded.
+[13:39:02] [info] STARDUST: Locale "en-gb" loaded.
+[13:39:02] [info] STARDUST: Sound system initialised.
+[13:39:02] [info] STARDUST: SDL initialised.
+[13:39:02] [info] STARDUST: Window created.
+[13:39:02] [info] STARDUST: Renderer created without VSync.
+[13:39:02] [info] STARDUST: Text subsystem initialised.
+[13:39:02] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
+[13:39:02] [trace] CLIENT: Texture "assets/textures/particle.png" loaded successfully.
+[13:39:02] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
+[13:39:02] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
+[13:39:02] [trace] STARDUST: Initial scene "Test" loaded.
+[13:39:27] [trace] STARDUST: Scene "Test" finished.

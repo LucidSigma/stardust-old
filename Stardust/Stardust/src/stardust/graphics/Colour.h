@@ -33,6 +33,12 @@ namespace stardust
 		constexpr Colour Brown{ 150u, 75u, 0u, 255u };
 		constexpr Colour Pink{ 255u, 192u, 203u, 255u };
 		constexpr Colour Tan{ 210u, 180u, 140u, 255u };
+		constexpr Colour Gold{ 255u, 215u, 0u, 255u };
+		constexpr Colour Azure{ 0u, 128u, 255u, 255u };
+		constexpr Colour Beige{ 245u, 245u, 220u, 255u };
+		constexpr Colour Lavender{ 230u, 230u, 255u, 255u };
+
+		constexpr Colour Clear{ 0u, 0u, 0u, 0u };
 	}
 
 	[[nodiscard]] extern glm::vec4 ColourToVec4(const Colour& colour);

@@ -202,24 +202,24 @@ public:
 		{
 			m_clickParticleDelay = 0.01f;
 
-			auto finalColour = sd::colours::Magenta;
+			auto finalColour = sd::colours::Yellow;
 			finalColour.a = 0u;
 
 			m_particles.Emit(sd::ParticleSystem::ParticleData{
 				.initialPosition = sd::Input::GetMouseState().GetProportionalCoordinates(m_application.GetRenderer()),
 				.initialRotation = 0.0f,
-				.minVelocity = { -250.0f, -250.0f },
-				.maxVelocity = { 250.0f, 250.0f },
+				.minVelocity = { -100.0f, -400.0f },
+				.maxVelocity = { 100.0f, -10.0f },
 				.velocityUpdateMultipler = 0.4f,
 				.minAngularVelocity = 0.0f,
 				.maxAngularVelocity = 180.0f,
 				.angularVelocityUpdateMultipler = -0.1f,
 				.isAffectedByGravity = false,
-				.minSize = { 20.0f, 30.0f },
-				.maxSize = { 60.0f, 60.0f },
-				.sizeUpdateMultipler = -0.4f,
-				.keepAsSquare = false,
-				.startColour = sd::colours::Purple,
+				.minSize = { 20.0f, 20.0f },
+				.maxSize = { 40.0f, 40.0f },
+				.sizeUpdateMultipler = -0.2f,
+				.keepAsSquare = true,
+				.startColour = sd::colours::Red,
 				.endColour = finalColour,
 				.texture = nullptr,
 				.textureArea = std::nullopt,

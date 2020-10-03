@@ -86,7 +86,7 @@ namespace stardust
 			return PHYSFS_exists(filepath.data()) != 0;
 		}
 
-		bool IsDirectory(const std::string_view& filepath)
+		[[nodiscard]] bool IsDirectory(const std::string_view& filepath)
 		{
 			return PHYSFS_isDirectory(filepath.data()) != 0;
 		}
