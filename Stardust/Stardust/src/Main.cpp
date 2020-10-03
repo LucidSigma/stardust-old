@@ -18,13 +18,17 @@ int main([[maybe_unused]] const int argc, char* argv[])
 		.localesArchive = "locales.pak",
 	};
 
+	const stardust::Application::PhysicsInfo physicsInfo{
+		.fixedTimestep = 0.01f,
+		.velocityIterations = 8u,
+		.positionIterations = 3u,
+	};
+
 	stardust::Application game({
 		.title = "Stardust",
 		.filepaths = gameFilepaths,
 		.filesystem = filesystemInfo,
-
-		.fixedTimestep = 0.01f,
-
+		.physics = physicsInfo,
 		.requireRenderToTexture = true,
 		.rendererLogicalSize = glm::uvec2{ 1920u, 1080u },
 	});

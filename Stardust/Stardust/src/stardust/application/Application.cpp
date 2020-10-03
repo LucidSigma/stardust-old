@@ -16,6 +16,7 @@
 #include "../graphics/surface/PixelSurface.h"
 #include "../input/Input.h"
 #include "../input/KeyCode.h"
+#include "../physics/world/World.h"
 #include "../scene/Scene.h"
 #include "../text/text_input/TextInput.h"
 #include "../utility/enums/Status.h"
@@ -164,8 +165,12 @@ namespace stardust
 
 		Input::SetGameControllerDeadzone(m_config["controls"]["controller-deadzone"]);
 
+		m_fixedTimestep = createInfo.physics.fixedTimestep;
+		physics::World::SetVelocityIterations(createInfo.physics.velocityIterations);
+		physics::World::SetPositionIterations(createInfo.physics.positionIterations);
+		Log::EngineInfo("Physics subsystem initialised.");
+
 		m_screenshotDirectory = createInfo.filepaths.screenshots;
-		m_fixedTimestep = createInfo.fixedTimestep;
 		m_ticksCount = SDL_GetPerformanceCounter();
 
 		m_didInitialiseSuccessfully = true;

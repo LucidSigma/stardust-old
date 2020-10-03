@@ -38,7 +38,7 @@ namespace stardust
 
 			if (particle->isAffectedByGravity)
 			{
-				particle->velocity.y -= m_gravity * deltaTime;
+				particle->velocity += m_gravity * deltaTime;
 			}
 
 			particle->position += particle->velocity * deltaTime;

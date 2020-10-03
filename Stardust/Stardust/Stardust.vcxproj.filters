@@ -108,6 +108,9 @@
     <ClCompile Include="src\stardust\graphics\texture\texture_atlas\TextureAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\stardust\physics\world\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stardust\utility\interfaces\INoncopyable.h">
@@ -240,6 +243,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\stardust\graphics\texture\texture_atlas\TextureAtlas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stardust\physics\world\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

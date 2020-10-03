@@ -84,7 +84,7 @@ namespace stardust
 
 		std::unordered_map<std::size_t, Particle*> m_activeParticles;
 
-		float m_gravity = 0.0f;
+		glm::vec2 m_gravity = glm::vec2{ 0.0f, 0.0f };
 
 	public:
 		static constexpr std::size_t GetMaxParticleCount() noexcept { return s_ParticleCount; }
@@ -100,8 +100,8 @@ namespace stardust
 
 		inline std::size_t GetActiveParticleCount() const noexcept { return m_activeParticles.size(); }
 
-		inline float GetGravity() const noexcept { return m_gravity; }
-		inline void SetGravity(const float gravity) noexcept { m_gravity = gravity; }
+		inline const glm::vec2& GetGravity() const noexcept { return m_gravity; }
+		inline void SetGravity(const glm::vec2& gravity) noexcept { m_gravity = gravity; }
 	};
 }
 

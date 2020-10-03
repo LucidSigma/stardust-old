@@ -6,6 +6,7 @@
 
 namespace sd = stardust;
 namespace sd_comp = stardust::components;
+namespace sd_phys = stardust::physics;
 
 struct KeyboardControlled
 {
@@ -57,6 +58,8 @@ private:
 	float m_clickParticleDelay = 0.01f;
 
 	sd::TextureAtlas m_textureAtlas;
+	
+	sd_phys::World m_physicsWorld;
 
 public:
 	TestScene(sd::Application& application, const std::string& name)
@@ -121,9 +124,10 @@ public:
 		m_drawable.AddComponent<Rotater>(250.0f);
 		m_drawable.AddComponent<sd_comp::SpriteRendererComponent>(m_textures["gear"]);
 
-		m_particles.SetGravity(-250.0f);
+		m_particles.SetGravity(glm::vec2{ 0.0f, 250.0f });
 
 		m_textureAtlas.Initialise(m_application.GetRenderer(), "assets/textures/texture_atlases/conveyors.taj");
+		m_physicsWorld.Initialise(glm::vec2{ 0.0f, -9.81f });
 
 		return sd::Status::Success;
 	}
@@ -155,6 +159,8 @@ public:
 				transform.rotation += fixedDeltaTime * rotater.torque;
 			}
 		});
+
+		m_physicsWorld.Step(fixedDeltaTime);
 	}
 
 	virtual void ProcessInput() override

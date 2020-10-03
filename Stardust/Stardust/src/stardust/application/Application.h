@@ -46,13 +46,21 @@ namespace stardust
 			std::string_view localesArchive;
 		};
 
+		struct PhysicsInfo
+		{
+			float fixedTimestep;
+
+			std::uint32_t velocityIterations;
+			std::uint32_t positionIterations;
+		};
+
 		struct CreateInfo
 		{
 			std::string_view title;
 			FilepathsInfo filepaths;
 			FilesystemCreateInfo filesystem;
 
-			float fixedTimestep;
+			PhysicsInfo physics;
 
 			bool requireRenderToTexture;
 			glm::uvec2 rendererLogicalSize;
