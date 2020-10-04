@@ -95,6 +95,7 @@ namespace stardust
 		void Flush() const;
 		void Clear(const Colour& colour) const;
 
+		// TODO: Pixels per unit.
 		void DrawPoint(const rect::Point& point, const Colour& colour) const;
 		void DrawPoints(const std::vector<rect::Point>& points, const Colour& colour) const;
 		void DrawLine(const rect::Line& line, const Colour& colour) const;

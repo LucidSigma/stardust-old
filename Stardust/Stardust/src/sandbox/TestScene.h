@@ -122,7 +122,7 @@ public:
 		);
 		m_drawable.AddComponent<Velocity>(0.0f, 0.0f);
 		m_drawable.AddComponent<Rotater>(250.0f);
-		m_drawable.AddComponent<sd_comp::SpriteRendererComponent>(m_textures["gear"]);
+		m_drawable.AddComponent<sd_comp::SpriteRendererComponent>(m_textures["gear"], glm::vec2{ 1.0f, 1.0f });
 
 		m_particles.SetGravity(glm::vec2{ 0.0f, 250.0f });
 

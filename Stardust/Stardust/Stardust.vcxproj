@@ -158,6 +158,7 @@
     <ClCompile Include="src\stardust\audio\SoundSource.cpp" />
     <ClCompile Include="src\stardust\audio\SoundSystem.cpp" />
     <ClCompile Include="src\stardust\audio\volume\VolumeManager.cpp" />
+    <ClCompile Include="src\stardust\camera\Camera.cpp" />
     <ClCompile Include="src\stardust\graphics\Colour.cpp" />
     <ClCompile Include="src\stardust\graphics\display\Display.cpp" />
     <ClCompile Include="src\stardust\graphics\renderer\Renderer.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="src\stardust\audio\sounds\SoundEnums.h" />
     <ClInclude Include="src\stardust\audio\sounds\Sounds.h" />
     <ClInclude Include="src\stardust\audio\volume\VolumeManager.h" />
+    <ClInclude Include="src\stardust\camera\Camera.h" />
     <ClInclude Include="src\stardust\graphics\Colour.h" />
     <ClInclude Include="src\stardust\graphics\display\Display.h" />
     <ClInclude Include="src\stardust\graphics\renderer\Renderer.h" />
