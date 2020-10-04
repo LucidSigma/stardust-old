@@ -26,7 +26,7 @@ namespace stardust
 				: texture(nullptr), scale(glm::vec2{ 0.0f, 0.0f }), z(0), renderArea(std::nullopt)
 			{ }
 
-			SpriteRendererComponent(const Texture& texture, const glm::vec2& worldSize, const bool keepProportional = true, const int z = 0, const decltype(renderArea)& renderArea = std::nullopt)
+			SpriteRendererComponent(const Texture& texture, const glm::vec2& scale, const int z = 0, const decltype(renderArea)& renderArea = std::nullopt)
 				: texture(&texture), scale(scale), z(z), renderArea(renderArea)
 			{ }
 
