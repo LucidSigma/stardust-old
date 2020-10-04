@@ -13,6 +13,7 @@
 #include "audio/SoundSystem.h"
 #include "audio/volume/VolumeManager.h"
 
+#include "camera/Camera.h"
 #include "config/Config.h"
 #include "debug/logging/Log.h"
 #include "debug/message_box/MessageBox.h"

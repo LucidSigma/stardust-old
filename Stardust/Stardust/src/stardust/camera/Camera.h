@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 
 #include "../graphics/renderer/Renderer.h"
-#include "../graphics/window/Window.h"
 
 namespace stardust
 {
@@ -20,6 +19,9 @@ namespace stardust
 
 		float m_halfSize = 0.0f;
 		float m_aspectRatio = 0.0f;
+		float m_pixelsPerUnit = 0.0f;
+
+		const Renderer* m_renderer = nullptr;
 
 	public:
 		Camera() = default;
@@ -42,11 +44,13 @@ namespace stardust
 		inline void SetZoom(const float zoom) noexcept { m_zoom = zoom; }
 
 		inline float GetHalfSize() const noexcept { return m_halfSize; }
-		inline void SetHalfSize(const float halfSize) noexcept { m_halfSize = halfSize; }
+		void SetHalfSize(const float halfSize) noexcept;
 
 		inline float GetAspectRatio() const noexcept { return m_aspectRatio; }
+		inline float GetPixelsPerUnit() const noexcept { return m_pixelsPerUnit; }
 
-		[[nodiscard]] float GetPixelsPerUnit(const Window& window) const noexcept;
+		[[nodiscard]] glm::uvec2 WorldSpaceToScreenSpace(glm::vec2 position) const noexcept;
+		[[nodiscard]] glm::vec2 ScreenSpaceToWorldSpace(const glm::uvec2& position) const noexcept;
 	};
 }
 

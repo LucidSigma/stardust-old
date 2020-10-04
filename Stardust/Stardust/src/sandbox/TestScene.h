@@ -61,6 +61,8 @@ private:
 	
 	sd_phys::World m_physicsWorld;
 
+	sd::Camera m_camera;
+
 public:
 	TestScene(sd::Application& application, const std::string& name)
 		: sd::Scene(application, name)
@@ -128,6 +130,8 @@ public:
 
 		m_textureAtlas.Initialise(m_application.GetRenderer(), "assets/textures/texture_atlases/conveyors.taj");
 		m_physicsWorld.Initialise(glm::vec2{ 0.0f, -9.81f });
+
+		m_camera.Initialise(m_application.GetRenderer(), 8.0f);
 
 		return sd::Status::Success;
 	}
