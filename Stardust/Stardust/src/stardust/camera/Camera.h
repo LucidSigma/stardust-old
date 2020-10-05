@@ -30,6 +30,8 @@ namespace stardust
 
 		void Initialise(const Renderer& renderer, const float halfSize);
 
+		void Refresh();
+
 		inline glm::vec2& GetPosition() noexcept { return m_position; }
 		inline const glm::vec2& GetPosition() const noexcept { return m_position; }
 		inline void SetPosition(const glm::vec2& position) noexcept { m_position = position; }

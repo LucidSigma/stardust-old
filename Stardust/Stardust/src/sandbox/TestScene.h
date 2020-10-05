@@ -184,6 +184,16 @@ public:
 			}
 		}
 
+		if (sd::Input::GetScrollState() != 0)
+		{
+			m_camera.SetZoom(std::max(0.5f, m_camera.GetZoom() + 0.5f * sd::Input::GetScrollState()));
+		}
+
+		if (sd::Input::GetMouseState().IsButtonDown(sd::Input::Mouse::Button::Middle))
+		{
+			m_camera.SetZoom(1.0f);
+		}
+
 		sd::SoundSource soundSource;
 
 		if (sd::Input::GetKeyboardState().IsKeyDown(sd::KeyCode::Space))
@@ -225,13 +235,13 @@ public:
 				.maxAngularVelocity = 180.0f,
 				.angularVelocityUpdateMultipler = -0.1f,
 				.isAffectedByGravity = false,
-				.minSize = { 20.0f, 20.0f },
-				.maxSize = { 40.0f, 40.0f },
+				.minSize = glm::vec2{ 20.0f, 20.0f } * m_camera.GetZoom(),
+				.maxSize = glm::vec2{ 40.0f, 40.0f } * m_camera.GetZoom(),
 				.sizeUpdateMultipler = -0.2f,
 				.keepAsSquare = true,
 				.startColour = sd::colours::Red,
 				.endColour = finalColour,
-				.texture = nullptr,
+				.texture = nullptr,  
 				.textureArea = std::nullopt,
 				.minLifetime = 0.5f,
 				.maxLifetime = 1.0f,
@@ -278,7 +288,7 @@ public:
 			{
 				m_particleCounter = 0.0f;
 				m_particles.Emit(sd::ParticleSystem::ParticleData{
-					.initialPosition = m_camera.WorldSpaceToScreenSpace(transform.position),
+					.initialPosition = m_camera.WorldSpaceToScreenSpace(transform.position * m_camera.GetZoom()),
 					.initialRotation = 0.0f,
 					.minVelocity = { -160.0f, -160.0f },
 					.maxVelocity = { 160.0f, 160.0f },
@@ -287,8 +297,8 @@ public:
 					.maxAngularVelocity = 180.0f,
 					.angularVelocityUpdateMultipler = -0.05f,
 					.isAffectedByGravity = true,
-					.minSize = { 10.0f, 10.0f },
-					.maxSize = { 25.0f, 25.0f },
+					.minSize = glm::vec2{ 10.0f, 10.0f } * m_camera.GetZoom(),
+					.maxSize = glm::vec2{ 25.0f, 25.0f } * m_camera.GetZoom(),
 					.sizeUpdateMultipler = -0.25f,
 					.keepAsSquare = true,
 					.startColour = sd::colours::Grey,
@@ -320,8 +330,8 @@ public:
 			renderer.DrawRotatedTexture(
 				*spriteRenderer.texture,
 				spriteRenderer.renderArea,
-				m_camera.WorldSpaceToScreenSpace(transform.position),
-				transform.scale,
+				m_camera.WorldSpaceToScreenSpace(transform.position * m_camera.GetZoom()),
+				transform.scale * m_camera.GetZoom(),
 				transform.rotation
 			);
 		});

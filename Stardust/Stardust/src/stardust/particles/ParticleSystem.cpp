@@ -87,7 +87,15 @@ namespace stardust
 				particle->texture->SetColourMod(particle->currentColour.r, particle->currentColour.g, particle->currentColour.b);
 				particle->texture->SetAlphaMod(particle->currentColour.a);
 
-				renderer.DrawRotatedTexture(*particle->texture, particle->textureArea, particle->position - particle->size / 2.0f, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation);
+				glm::vec2 particleScale = particle->size / static_cast<glm::vec2>(particle->texture->GetSize());
+
+				if (particle->textureArea.has_value())
+				{
+					particleScale.x = particle->size.x / static_cast<float>(particle->textureArea->w);
+					particleScale.y = particle->size.y / static_cast<float>(particle->textureArea->h);
+				}
+
+				renderer.DrawRotatedTexture(*particle->texture, particle->textureArea, particle->position, particleScale, particle->rotation);
 
 				particle->texture->SetColourMod(originalRed, originalGreen, originalBlue);
 				particle->texture->SetAlphaMod(originalAlpha);

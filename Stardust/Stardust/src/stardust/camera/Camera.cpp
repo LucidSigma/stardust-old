@@ -18,6 +18,11 @@ namespace stardust
         m_pixelsPerUnit = renderer.GetLogicalSize().x / (m_halfSize * 2.0f);
     }
 
+    void Camera::Refresh()
+    {
+        m_pixelsPerUnit = m_renderer->GetLogicalSize().x / (m_halfSize * 2.0f);
+    }
+
     void Camera::SetHalfSize(const float halfSize) noexcept
     {
         m_halfSize = halfSize;
