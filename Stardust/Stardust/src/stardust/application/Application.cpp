@@ -381,18 +381,12 @@ namespace stardust
 					break;
 				}
 
-				if (text_input::IsActive() && magic_enum::enum_contains<KeyCode>(event.key.keysym.scancode))
-				{
-					m_sceneManager.CurrentScene()->OnKeyDown(static_cast<KeyCode>(event.key.keysym.scancode));
-				}
+				m_sceneManager.CurrentScene()->OnKeyDown(static_cast<KeyCode>(event.key.keysym.scancode));
 
 				break;
 
 			case SDL_KEYUP:
-				if (text_input::IsActive() && magic_enum::enum_contains<KeyCode>(event.key.keysym.scancode))
-				{
-					m_sceneManager.CurrentScene()->OnKeyUp(static_cast<KeyCode>(event.key.keysym.scancode));
-				}
+				m_sceneManager.CurrentScene()->OnKeyUp(static_cast<KeyCode>(event.key.keysym.scancode));
 
 				break;
 
