@@ -215,12 +215,17 @@ namespace stardust
 
 	void Renderer::DrawTexture(const Texture& texture, const std::optional<rect::Rect>& sourceRect, const glm::vec2& position, const glm::vec2& scale) const
 	{
+		const glm::vec2 textureSize{
+			(sourceRect.has_value() ? sourceRect->w : texture.GetSize().x) * scale.x,
+			(sourceRect.has_value() ? sourceRect->h : texture.GetSize().y) * scale.y,
+		};
+
 		const rect::Rect* sourceRectPointer = sourceRect.has_value() ? &sourceRect.value() : nullptr;
 		const rect::Rect destinationRect = rect::Create(
-			static_cast<int>(position.x),
-			static_cast<int>(position.y),
-			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->w : texture.GetSize().x) * scale.x),
-			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->h : texture.GetSize().y) * scale.y)
+			static_cast<int>(position.x - textureSize.x / 2.0f),
+			static_cast<int>(position.y - textureSize.y / 2.0f),
+			static_cast<unsigned int>(textureSize.x),
+			static_cast<unsigned int>(textureSize.y)
 		);
 
 		SDL_RenderCopy(GetRawHandle(), texture.GetRawHandle(), sourceRectPointer, &destinationRect);
@@ -232,20 +237,26 @@ namespace stardust
 		const glm::vec2& position,
 		const glm::vec2& scale,
 		const float angle,
-		const std::optional<rect::Point>& centre,
+		const glm::uvec2& rotationOffset,
 		const FlipAxis flipAxis
 	) const
 	{
+		const glm::vec2 textureSize{
+			(sourceRect.has_value() ? sourceRect->w : texture.GetSize().x) * scale.x,
+			(sourceRect.has_value() ? sourceRect->h : texture.GetSize().y) * scale.y,
+		};
+
 		const rect::Rect* sourceRectPointer = sourceRect.has_value() ? &sourceRect.value() : nullptr;
-		const rect::Point* centrePointer = centre.has_value() ? &centre.value() : nullptr;
 		const rect::Rect destinationRect = rect::Create(
-			static_cast<int>(position.x),
-			static_cast<int>(position.y),
-			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->w : texture.GetSize().x) * scale.x),
-			static_cast<unsigned int>((sourceRect.has_value() ? sourceRect->h : texture.GetSize().y) * scale.y)
+			static_cast<int>(position.x - textureSize.x / 2.0f),
+			static_cast<int>(position.y - textureSize.y / 2.0f),
+			static_cast<unsigned int>(textureSize.x),
+			static_cast<unsigned int>(textureSize.y)
 		);
 
-		SDL_RenderCopyEx(GetRawHandle(), texture.GetRawHandle(), sourceRectPointer, &destinationRect, angle, centrePointer, static_cast<SDL_RendererFlip>(flipAxis));
+		const rect::Point centrePoint = rect::Create(destinationRect.w / 2 + rotationOffset.x, destinationRect.h / 2 + rotationOffset.y);
+
+		SDL_RenderCopyEx(GetRawHandle(), texture.GetRawHandle(), sourceRectPointer, &destinationRect, angle, &centrePoint, static_cast<SDL_RendererFlip>(flipAxis));
 	}
 
 	[[nodiscard]] PixelSurface Renderer::ReadPixels(const std::optional<rect::Rect>& areaToRead) const

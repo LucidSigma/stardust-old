@@ -1,7 +1,6 @@
 #include "ParticleSystem.h"
 
 #include <cstdint>
-#include <optional>
 
 #include <glm/gtx/compatibility.hpp>
 
@@ -88,7 +87,7 @@ namespace stardust
 				particle->texture->SetColourMod(particle->currentColour.r, particle->currentColour.g, particle->currentColour.b);
 				particle->texture->SetAlphaMod(particle->currentColour.a);
 
-				renderer.DrawRotatedTexture(*particle->texture, particle->textureArea, particle->position - particle->size / 2.0f, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation, std::nullopt);
+				renderer.DrawRotatedTexture(*particle->texture, particle->textureArea, particle->position - particle->size / 2.0f, particle->size / static_cast<glm::vec2>(particle->texture->GetSize()), particle->rotation);
 
 				particle->texture->SetColourMod(originalRed, originalGreen, originalBlue);
 				particle->texture->SetAlphaMod(originalAlpha);

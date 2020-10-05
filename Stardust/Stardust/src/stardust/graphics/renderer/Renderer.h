@@ -109,7 +109,7 @@ namespace stardust
 			const glm::vec2& position,
 			const glm::vec2& scale,
 			const float angle,
-			const std::optional<rect::Point>& centre,
+			const glm::uvec2& rotationOffset = glm::vec2{ 0.0f, 0.0f },
 			const FlipAxis flipAxis = FlipAxis::None
 		) const;
 
