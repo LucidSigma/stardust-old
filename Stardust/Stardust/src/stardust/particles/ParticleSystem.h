@@ -98,6 +98,9 @@ namespace stardust
 		void Emit(const ParticleData& particleData);
 		void KillAllParticles();
 
+		void RepositionAllActiveParticles(const glm::vec2& relativePosition);
+		void ResizeAllActiveParticles(const float relativeScale);
+
 		inline std::size_t GetActiveParticleCount() const noexcept { return m_activeParticles.size(); }
 
 		inline const glm::vec2& GetGravity() const noexcept { return m_gravity; }

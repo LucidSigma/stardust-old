@@ -144,4 +144,20 @@ namespace stardust
 	{
 		m_activeParticles.clear();
 	}
+
+	void ParticleSystem::RepositionAllActiveParticles(const glm::vec2& relativePosition)
+	{
+		for (auto& [particleID, particle] : m_activeParticles)
+		{
+			particle->position += relativePosition;
+		}
+	}
+
+	void ParticleSystem::ResizeAllActiveParticles(const float relativeScale)
+	{
+		for (auto& [particleID, particle] : m_activeParticles)
+		{
+			particle->size *= relativeScale;
+		}
+	}
 }

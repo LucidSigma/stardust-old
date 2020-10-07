@@ -1,18 +1,18 @@
-[13:44:57] [info] STARDUST: Logger initialised.
-[13:44:57] [debug] STARDUST: Platform detected: "Windows".
-[13:44:57] [info] STARDUST: ECS initialised.
-[13:44:57] [info] STARDUST: Virtual filesystem initialised.
-[13:44:57] [info] STARDUST: Config loaded.
-[13:44:57] [info] STARDUST: Locale "en-gb" loaded.
-[13:44:57] [info] STARDUST: Sound system initialised.
-[13:44:57] [info] STARDUST: SDL initialised.
-[13:44:57] [info] STARDUST: Window created.
-[13:44:57] [info] STARDUST: Renderer created without VSync.
-[13:44:57] [info] STARDUST: Text subsystem initialised.
-[13:44:57] [info] STARDUST: Physics subsystem initialised.
-[13:44:57] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
-[13:44:57] [trace] CLIENT: Texture "assets/textures/particle.png" loaded successfully.
-[13:44:57] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
-[13:44:57] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
-[13:44:57] [trace] STARDUST: Initial scene "Test" loaded.
-[13:45:53] [trace] STARDUST: Scene "Test" finished.
+[13:48:35] [info] STARDUST: Logger initialised.
+[13:48:35] [debug] STARDUST: Platform detected: "Windows".
+[13:48:35] [info] STARDUST: ECS initialised.
+[13:48:35] [info] STARDUST: Virtual filesystem initialised.
+[13:48:35] [info] STARDUST: Config loaded.
+[13:48:35] [info] STARDUST: Locale "en-gb" loaded.
+[13:48:35] [info] STARDUST: Sound system initialised.
+[13:48:35] [info] STARDUST: SDL initialised.
+[13:48:35] [info] STARDUST: Window created.
+[13:48:36] [info] STARDUST: Renderer created without VSync.
+[13:48:36] [info] STARDUST: Text subsystem initialised.
+[13:48:36] [info] STARDUST: Physics subsystem initialised.
+[13:48:36] [trace] CLIENT: Texture "assets/textures/gear.png" loaded successfully.
+[13:48:36] [trace] CLIENT: Texture "assets/textures/particle.png" loaded successfully.
+[13:48:36] [trace] CLIENT: Sound "assets/sounds/test.wav" loaded successfully.
+[13:48:36] [trace] CLIENT: Font "assets/fonts/arial.ttf" loaded successfully.
+[13:48:36] [trace] STARDUST: Initial scene "Test" loaded.
+[13:48:58] [trace] STARDUST: Scene "Test" finished.

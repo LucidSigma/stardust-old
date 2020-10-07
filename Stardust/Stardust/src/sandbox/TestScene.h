@@ -184,6 +184,8 @@ public:
 			}
 		}
 
+		float initialZoom = m_camera.GetZoom();
+
 		if (sd::Input::GetScrollState() != 0)
 		{
 			m_camera.SetZoom(std::max(0.5f, m_camera.GetZoom() + 0.5f * sd::Input::GetScrollState()));
@@ -192,6 +194,11 @@ public:
 		if (sd::Input::GetMouseState().IsButtonDown(sd::Input::Mouse::Button::Middle))
 		{
 			m_camera.SetZoom(1.0f);
+		}
+
+		if (initialZoom != m_camera.GetZoom())
+		{
+			m_particles.ResizeAllActiveParticles(m_camera.GetZoom() / initialZoom);
 		}
 
 		sd::SoundSource soundSource;
